@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--red:#C0181A;--rs:#FCEAEA;--rm:#F0BABA;--ink:#1C1C1E;--i2:#4A4A52;--i3:#8A8A96;--bg:#F0F0F2;--sur:#FFF;--bor:#E0E0E4;--b2:#C8C8CE;--ok:#1B7F4C;--ob:#E8F5EE;--wn:#B05C00;--wb:#FFF3E0;--blue:#1558D6;--bs:#EBF0FF}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;min-height:100vh}
+nav{background:var(--sur);border-bottom:1px solid var(--bor);position:sticky;top:0;z-index:90}
+.ni{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:54px}
+.nl{display:flex;align-items:center;gap:11px}
+.nl img{width:33px;height:33px;object-fit:contain}
+.nt strong{font-size:13px;font-weight:600;display:block;line-height:1.3}
+.nt span{font-size:11px;color:var(--i3)}
+.ns{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:500;color:var(--ok)}
+.nd{width:7px;height:7px;border-radius:50%;background:var(--ok);flex-shrink:0}
+.nb-w{display:flex;gap:2px}
+.nb{background:none;border:none;color:var(--i2);padding:7px 12px;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:500;cursor:pointer;border-radius:7px;transition:.15s}
+.nb:hover{background:var(--bg);color:var(--ink)}.nb.active{color:var(--red);font-weight:600;background:var(--rs)}
+main{max-width:1100px;margin:0 auto;padding:28px 24px}
+.pg{display:none}.pg.active{display:block}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:.15s}
+.br{background:var(--red);color:#fff}.br:hover{background:#A81416}.br:disabled{opacity:.6;cursor:not-allowed}
+.bo{background:var(--sur);color:var(--i2);border:1.5px solid var(--b2)}.bo:hover{background:var(--bg)}
+.bg2{background:var(--bg);color:var(--i2);border:1px solid var(--bor)}.bg2:hover{background:var(--bor)}
+.bw{background:var(--sur);color:var(--red);border:1.5px solid var(--red)}.bw:hover{background:var(--rs)}
+.bblue{background:var(--blue);color:#fff}.bblue:hover{background:#0f46b8}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pop{from{transform:scale(.96);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes slideUp{from{transform:translateY(14px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* BERANDA */
+.bw-wrap{max-width:820px;margin:0 auto}
+.hc{background:var(--sur);border:1px solid var(--bor);border-radius:14px;padding:40px 32px;text-align:center;margin-bottom:18px}
+.hc img{width:70px;height:70px;object-fit:contain;margin-bottom:14px}
+.hc h1{font-size:20px;font-weight:600;margin-bottom:5px}.hc>p{font-size:13px;color:var(--i3);margin-bottom:22px}
+.hb{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.sb{background:var(--sur);border:1px solid var(--bor);border-radius:14px;padding:22px 24px;margin-bottom:18px}
+.slbl{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;color:var(--i3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:16px}
+.slbl::before{content:'';width:3px;height:13px;background:var(--red);border-radius:2px;flex-shrink:0}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sc{background:var(--bg);border-radius:10px;padding:16px}
+.sct{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.scn{width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sc h4{font-size:13px;font-weight:600}
+.sc ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+.sc li{font-size:12px;color:var(--i3);padding-left:14px;position:relative;line-height:1.55}
+.sc li::before{content:'·';position:absolute;left:4px;color:var(--red)}
+.ig{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ii{display:flex;gap:10px;align-items:flex-start}
+.ic2{width:32px;height:32px;background:var(--rs);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ic2 svg{width:15px;height:15px;stroke:var(--red);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ii h4{font-size:13px;font-weight:600;margin-bottom:2px}.ii p{font-size:12px;color:var(--i3);line-height:1.55}
+.ntc{background:var(--rs);border:1px solid var(--rm);border-left:3px solid var(--red);border-radius:0 7px 7px 0;padding:11px 14px;font-size:12px;color:var(--i2);line-height:1.65;margin-top:14px}
+
+/* FORMULIR */
+.fh{margin-bottom:20px}.fh h2{font-size:17px;font-weight:600;margin-bottom:3px}.fh p{font-size:13px;color:var(--i3)}
+.fb{background:var(--sur);border:1px solid var(--bor);border-radius:12px;overflow:hidden;margin-bottom:14px}
+.fbh{padding:12px 20px;border-bottom:1px solid var(--bor);display:flex;align-items:center;gap:10px}
+.fbn{width:22px;height:22px;border-radius:50%;background:var(--red);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fbn.blue{background:var(--blue)}
+.fbh h3{font-size:13px;font-weight:600}.fbh em{font-size:12px;color:var(--i3);font-style:normal;margin-left:auto}
+.fbd{padding:20px}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}.fr.full{grid-template-columns:1fr}.fr:last-child{margin-bottom:0}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg label{font-size:12px;font-weight:600;color:var(--i2)}.fg label .r{color:var(--red)}
+.fg input,.fg select,.fg textarea{border:1.5px solid var(--b2);border-radius:7px;padding:8px 12px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);background:var(--sur);outline:none;transition:.15s;width:100%}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(192,24,26,.08)}
+.fg textarea{resize:vertical;min-height:78px}
+.fg .ht{font-size:11px;color:var(--i3)}
+.np{background:var(--bg);border:1.5px solid var(--b2);border-radius:7px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--i2);letter-spacing:.5px}
+.er{font-size:11px;color:var(--red);display:none}.er.show{display:block}
+.cks{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.ck{display:flex;align-items:flex-start;gap:10px;padding:12px;background:var(--bg);border:1.5px solid var(--bor);border-radius:8px;cursor:pointer;transition:.15s}
+.ck:hover{border-color:var(--rm)}
+.ck input[type=checkbox]{width:15px;height:15px;margin-top:2px;accent-color:var(--red);flex-shrink:0}
+.ck label{font-size:12px;line-height:1.65;cursor:pointer;color:var(--i2)}
+.ff{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-top:1px solid var(--bor);background:var(--bg)}
+.ff p{font-size:12px;color:var(--i3);max-width:420px;line-height:1.5}
+.dv{height:1px;background:var(--bor);margin:16px 0}
+.ttd-canvas{border:1.5px solid var(--b2);border-radius:8px;background:#fff;cursor:crosshair;display:block;touch-action:none;width:100%}
+.ttd-ctrl{display:flex;gap:8px;margin-top:8px;align-items:center}
+.ttd-st{font-size:11px;color:var(--i3)}
+
+/* STATUS */
+.sw{max-width:460px;margin:0 auto}
+.sc2{background:var(--sur);border:1px solid var(--bor);border-radius:12px;overflow:hidden}
+.sch{padding:16px 20px;border-bottom:1px solid var(--bor)}.sch h2{font-size:14px;font-weight:600;margin-bottom:3px}.sch p{font-size:12px;color:var(--i3)}
+.scb{padding:20px}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:20px;font-size:12px;font-weight:600}
+.bw2{background:var(--wb);color:var(--wn)}.bd{background:var(--ob);color:var(--ok)}.bf{background:var(--rs);color:var(--red)}
+.det{margin-top:14px;background:var(--bg);border-radius:9px;padding:14px}
+.dr{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bor);font-size:13px}
+.dr:last-child{border-bottom:none}.dr .dl{color:var(--i3);font-weight:500}.dr .dv2{font-weight:500;text-align:right;max-width:58%}
+
+/* SIMULASI */
+.sim-wrap{max-width:900px;margin:0 auto}
+.sim-head{margin-bottom:20px}
+.sim-head h2{font-size:17px;font-weight:600;margin-bottom:4px}
+.sim-head p{font-size:13px;color:var(--i3)}
+.sim-card{background:var(--sur);border:1px solid var(--bor);border-radius:12px;overflow:hidden;margin-bottom:14px}
+.sc-head{padding:12px 20px;border-bottom:1px solid var(--bor);display:flex;align-items:center;gap:10px;background:var(--bs)}
+.sc-head h3{font-size:13px;font-weight:600;color:var(--blue)}
+.sc-head em{font-size:12px;color:var(--i3);font-style:normal;margin-left:auto}
+.sc-body{padding:20px}
+
+/* HASIL */
+.hasil-wrap{animation:slideUp .3s ease}
+.hero-card{background:linear-gradient(135deg,var(--blue) 0%,#0a3fa0 100%);border-radius:12px;padding:22px 24px;color:#fff;margin-bottom:14px;position:relative;overflow:hidden}
+.hero-card::before{content:'PBB';font-size:110px;font-weight:700;position:absolute;right:-10px;bottom:-20px;opacity:.06;line-height:1}
+.hero-card h3{font-size:12px;font-weight:500;opacity:.8;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.hero-total{font-size:26px;font-weight:700;letter-spacing:-.5px;margin-bottom:2px}
+.hero-sub{font-size:12px;opacity:.72;margin-bottom:14px}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.hs{background:rgba(255,255,255,.13);border-radius:8px;padding:10px 12px}
+.hs .hl{font-size:10px;opacity:.75;font-weight:500;text-transform:uppercase;letter-spacing:.3px;margin-bottom:3px}
+.hs .hv{font-size:13px;font-weight:600}
+.tbl-card{background:var(--sur);border:1px solid var(--bor);border-radius:12px;overflow:hidden;margin-bottom:14px}
+.tbl-head-bar{background:var(--bg);padding:11px 18px;border-bottom:1px solid var(--bor);font-size:12px;font-weight:600;color:var(--i2);display:flex;align-items:center;gap:8px}
+.tbl-head-bar::before{content:'';width:3px;height:12px;background:var(--blue);border-radius:2px}
+.tbl-scroll{overflow-x:auto}
+table.rt{width:100%;border-collapse:collapse;font-size:12.5px;min-width:580px}
+table.rt thead th{background:var(--bg);padding:9px 14px;text-align:right;font-weight:600;color:var(--i3);font-size:11px;letter-spacing:.3px;border-bottom:1px solid var(--bor);white-space:nowrap}
+table.rt thead th:first-child{text-align:center;width:100px}
+table.rt tbody td{padding:9px 14px;text-align:right;border-bottom:1px solid var(--bor);color:var(--ink);white-space:nowrap}
+table.rt tbody td:first-child{text-align:center;font-weight:600}
+table.rt tbody tr:last-child td{border-bottom:none}
+table.rt tbody tr:hover td{background:var(--bg)}
+table.rt tbody tr.row-lunas td{color:var(--i3)}
+table.rt tbody tr.row-awal td{background:var(--wb);font-weight:600}
+table.rt tbody tr.row-p2 td{background:#F0F7FF}
+table.rt tbody tr.row-p3u td{background:#F0FFF4}
+table.rt tbody tr.row-p3k td{background:#FFF0F5}
+table.rt tfoot td{padding:10px 14px;font-weight:700;border-top:2px solid var(--bor);background:var(--bg);text-align:right;font-size:13px}
+.tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px}
+.tg-lunas{background:var(--ob);color:var(--ok)}
+.tg-awal{background:var(--wb);color:var(--wn)}
+.tg-blm{background:var(--rs);color:var(--red)}
+
+/* formula box */
+.formula-box{background:var(--bs);border:1px solid #b3c9ff;border-radius:10px;padding:14px 18px;margin-bottom:14px;font-size:12px;line-height:1.9;color:var(--i2)}
+.formula-box strong{color:var(--blue);display:block;font-size:13px;margin-bottom:4px}
+.formula-line{font-family:'DM Mono',monospace;font-size:11.5px;color:var(--ink);padding:2px 0}
+.keterangan{background:var(--sur);border:1px solid var(--bor);border-radius:10px;padding:14px 18px;font-size:12px;line-height:1.8;color:var(--i2);margin-bottom:14px}
+.leg{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--i3)}
+.leg-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+
+/* ADMIN */
+.ag{max-width:360px;margin:0 auto}
+.lc{background:var(--sur);border:1px solid var(--bor);border-radius:12px;overflow:hidden}
+.lch{padding:14px 20px;border-bottom:1px solid var(--bor);display:flex;align-items:center;gap:10px}
+.lci{width:32px;height:32px;background:var(--rs);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.lci svg{width:15px;height:15px;stroke:var(--red);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.lch h3{font-size:13px;font-weight:600}.lcb{padding:20px}
+.pb{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.pb h2{font-size:17px;font-weight:600}.pb p{font-size:12px;color:var(--i3)}
+.sts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.sb2{background:var(--sur);border:1px solid var(--bor);border-radius:10px;padding:14px}
+.sb2 .sn2{font-size:24px;font-weight:600}.sb2 .sl2{font-size:11px;color:var(--i3);margin-top:2px}
+.on{color:var(--ok)}.wn{color:var(--wn)}
+.sr{display:flex;gap:8px;margin-bottom:16px}
+.sr input{flex:1;border:1.5px solid var(--b2);border-radius:8px;padding:8px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none}
+.sr input:focus{border-color:var(--red)}
+.tw{background:var(--sur);border:1px solid var(--bor);border-radius:12px;overflow:hidden}.tw-scroll{overflow-x:auto;overflow-y:auto;max-height:540px}.tw-scroll table{width:100%;border-collapse:collapse;min-width:700px}.tw-scroll thead th{position:sticky;top:0;z-index:2;background:var(--bg);padding:9px 14px;text-align:left;font-weight:600;color:var(--i3);font-size:11px;letter-spacing:.3px;border-bottom:1px solid var(--bor);white-space:nowrap}.tw-scroll tbody td{padding:10px 14px;border-bottom:1px solid var(--bor);font-size:13px;vertical-align:middle}.tw-scroll tbody tr:last-child td{border-bottom:none}.tw-scroll tbody tr:hover{background:var(--bg)}.tw-pg{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-top:1px solid var(--bor);font-size:12px;color:var(--i3)}.tw-pg-btn{display:flex;gap:6px}.tw-pg-btn button{padding:4px 10px;font-size:12px;border:1px solid var(--bor);border-radius:6px;background:var(--sur);cursor:pointer;color:var(--ink)}.tw-pg-btn button:hover{background:var(--bg)}.tw-pg-btn button.active{background:var(--red);color:#fff;border-color:var(--red)}.tw-pg-btn button:disabled{opacity:.4;cursor:default}
+.tw table{width:100%;border-collapse:collapse;table-layout:fixed}
+.tw th{background:var(--bg);color:var(--i3);padding:9px 14px;font-size:11px;font-weight:600;text-align:left;letter-spacing:.3px;border-bottom:1px solid var(--bor)}
+.tw td{padding:10px 14px;font-size:13px;border-bottom:1px solid var(--bor)}
+.tw tr:last-child td{border-bottom:none}.tw tr:hover td{background:var(--bg)}
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto}
+.ov.show{display:flex}
+.mb{background:var(--sur);border-radius:14px;border:1px solid var(--bor);max-width:660px;width:100%;animation:pop .2s ease;margin:auto}
+.mh{padding:14px 20px;border-bottom:1px solid var(--bor);display:flex;align-items:center;justify-content:space-between}
+.mh h3{font-size:13px;font-weight:600}
+.mcl{background:none;border:none;color:var(--i3);font-size:20px;cursor:pointer;line-height:1;padding:0}.mcl:hover{color:var(--ink)}
+.md{padding:20px}.ms{margin-bottom:16px}
+.mst{font-size:10px;font-weight:600;color:var(--i3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--bor)}
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.mf{background:var(--bg);border-radius:7px;padding:9px 12px}
+.mfl{font-size:10px;font-weight:600;color:var(--i3);letter-spacing:.3px;text-transform:uppercase;margin-bottom:2px}
+.mfv{font-size:13px;font-weight:500}
+.nw{background:var(--rs);border:1px solid var(--rm);border-radius:9px;padding:14px}
+.nw h4{font-size:12px;font-weight:600;color:var(--red);margin-bottom:10px}
+.ng{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.nf label{font-size:11px;font-weight:600;color:var(--i2);display:block;margin-bottom:3px}
+.nf input{width:100%;border:1.5px solid var(--rm);border-radius:6px;padding:7px 10px;font-size:13px;font-family:'DM Mono',monospace;color:var(--ink);background:var(--sur);outline:none}
+.nf input:focus{border-color:var(--red)}.nf input:disabled{background:var(--bg);color:var(--i3)}
+.mft{padding:12px 20px;border-top:1px solid var(--bor);display:flex;justify-content:flex-end;gap:8px;background:var(--bg);border-radius:0 0 14px 14px}
+.so{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:10000;align-items:center;justify-content:center;padding:20px}
+.so.show{display:flex}
+.sbox{background:var(--sur);border-radius:14px;border:1px solid var(--bor);padding:36px 28px;max-width:420px;width:100%;text-align:center;animation:pop .25s ease}
+.si{width:52px;height:52px;background:var(--ob);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.si svg{width:24px;height:24px;stroke:var(--ok);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.sbox h2{font-size:17px;font-weight:600;margin-bottom:6px}
+.sbox p{font-size:13px;color:var(--i3);line-height:1.65;margin-bottom:12px}
+.nb2{font-family:'DM Mono',monospace;font-size:18px;font-weight:500;color:var(--red);background:var(--rs);border:1.5px dashed var(--rm);border-radius:10px;padding:14px;margin:12px 0;letter-spacing:2px}
+.sa{display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.info-box{background:var(--ob);border:1px solid #a8d5bb;border-radius:8px;padding:11px 14px;font-size:12px;color:#1a5c38;margin-bottom:12px;text-align:left;line-height:1.6}
+@media(max-width:640px){.fr,.mg,.ng,.sts,.sg,.ig,.hero-stats{grid-template-columns:1fr}.nb-w{gap:0}.nb{padding:7px 8px;font-size:11.5px}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="ni">
+    <div class="nl">
+      <img src="https://lh3.googleusercontent.com/d/1KsP6VSELFzpfvkaz4rHUEvrFkJGLoBIm" alt="Logo" onerror="this.style.display='none'">
+      <div class="nt"><strong>Sistem Permohonan Buka Blokir PBB</strong><span>Pelayanan PBB-P2 Kabupaten Tabanan</span></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px">
+      <div class="ns"><div class="nd" id="nd"></div><span id="nst">Memeriksa...</span></div>
+      <div class="nb-w">
+        <button class="nb active" onclick="gP('beranda',this)">Beranda</button>
+        <button class="nb" onclick="gP('formulir',this)">Permohonan</button>
+        <button class="nb" onclick="gP('simulasi',this)">Simulasi Tagihan</button>
+        <button class="nb" onclick="gP('status',this)">Cek Status</button>
+        <button class="nb" onclick="gP('admin',this)">Ruang Petugas</button>
+      </div>
+    </div>
+  </div>
+</nav>
+<main>
+
+<!-- BERANDA -->
+<div class="pg active" id="pg-beranda">
+  <div class="bw-wrap">
+    <div class="hc">
+      <img src="https://lh3.googleusercontent.com/d/1KsP6VSELFzpfvkaz4rHUEvrFkJGLoBIm" alt="Logo Tabanan" onerror="this.style.display='none'">
+      <h1>Sistem Permohonan Buka Blokir PBB</h1>
+      <p>Badan Keuangan Daerah Kabupaten Tabanan</p>
+      <div class="hb">
+        <button class="btn br" onclick="gP2('formulir')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>Ajukan Permohonan</button>
+        <button class="btn bo" onclick="gP2('simulasi')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M6 7h4M6 11h8M6 15h2"/></svg>Simulasi Tagihan PBB</button>
+      </div>
+    </div>
+    <div class="sb">
+      <div class="slbl">Tata Cara Pengajuan</div>
+      <div class="sg">
+        <div class="sc"><div class="sct"><div class="scn">1</div><h4>Siapkan Dokumen</h4></div><ul><li>KTP Pemohon / kuasa</li><li>SPPT terakhir / NOP</li><li>Bukti Lunas PBB-P2</li><li>Surat Pernyataan siap membayar</li></ul></div>
+        <div class="sc"><div class="sct"><div class="scn">2</div><h4>Isi Formulir Online</h4></div><ul><li>Lengkapi semua kolom bertanda *</li><li>Bubuhkan tanda tangan digital</li><li>Klik Submit Permohonan</li></ul></div>
+        <div class="sc"><div class="sct"><div class="scn">3</div><h4>Data Tersimpan Aman</h4></div><ul><li>Data + TTD tersimpan di Spreadsheet</li><li>Nomor surat diterbitkan otomatis</li><li>Catat nomor surat Anda</li></ul></div>
+        <div class="sc"><div class="sct"><div class="scn">4</div><h4>Simulasi Tagihan</h4></div><ul><li>Hitung estimasi tagihan PBB</li><li>Berdasarkan tabel NJOP resmi daerah</li><li>Kenaikan per periode otomatis</li></ul></div>
+      </div>
+    </div>
+    <div class="sb">
+      <div class="slbl">Informasi Kantor</div>
+      <div class="ig">
+        <div class="ii"><div class="ic2"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><h4>Alamat</h4><p>Badan Keuangan Daerah<br>Kabupaten Tabanan, Bali</p></div></div>
+        <div class="ii"><div class="ic2"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.62a19.79 19.79 0 01-3.07-8.64A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div><div><h4>Telepon</h4><p>(0361) 811312</p></div></div>
+        <div class="ii"><div class="ic2"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><h4>Jam Layanan</h4><p>Senin – Jumat, 08.00 – 16.00 WITA</p></div></div>
+        <div class="ii"><div class="ic2"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><h4>Email</h4><p>pbb.tabanan@gmail.com</p></div></div>
+      </div>
+      <div class="ntc"><strong>Perhatian:</strong> Permohonan hanya dapat diajukan oleh Wajib Pajak atau kuasa yang sah.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FORMULIR -->
+<div class="pg" id="pg-formulir">
+  <div class="fh"><h2>Formulir Permohonan Buka Blokir PBB</h2><p>Kolom bertanda <span style="color:var(--red)">*</span> wajib diisi.</p></div>
+  <form id="frm-utama" autocomplete="on" onsubmit="return false">
+  <div class="fb"><div class="fbh"><div class="fbn">1</div><h3>Data Pemohon</h3><em>Identitas &amp; kontak</em></div><div class="fbd"><div class="fr"><div class="fg"><label>Nama Pemohon <span class="r">*</span></label><input type="text" id="f-nama" placeholder="Nama lengkap sesuai KTP" autocomplete="name"><div class="er" id="e-nama">Nama wajib diisi</div></div><div class="fg"><label>Nomor HP <span class="r">*</span></label><input type="tel" id="f-hp" placeholder="08xxxxxxxxxx" maxlength="15" autocomplete="tel"><div class="er" id="e-hp">Nomor HP tidak valid</div></div></div><div class="fr"><div class="fg"><label>Email <span class="r">*</span></label><input type="email" id="f-email" placeholder="nama@email.com" autocomplete="email"><div class="er" id="e-email">Email tidak valid</div></div><div class="fg"><label>Alamat Lengkap <span class="r">*</span></label><textarea id="f-alamat" placeholder="Jalan, No, Banjar, Desa, Kec, Kab" style="min-height:72px" autocomplete="street-address"></textarea><div class="er" id="e-alamat">Alamat wajib diisi</div></div></div></div></div>
+  <div class="fb"><div class="fbh"><div class="fbn">2</div><h3>Data Objek Pajak (SPPT)</h3><em>Surat Pemberitahuan Pajak Terhutang</em></div><div class="fbd"><div class="fr"><div class="fg"><label>Nomor Objek Pajak (NOP) <span class="r">*</span></label><input type="text" id="f-nop" placeholder="Ketik 18 digit angka NOP..." maxlength="25" oninput="fmtNOP(this)"><div class="ht">Format otomatis: XX.XX.XXX.XXX.XXX.XXXX.X</div><div class="er" id="e-nop">NOP harus 18 digit angka</div></div><div class="fg"><label>NOP Terformat</label><div class="np" id="nop-d">00.00.000.000.000.0000.0</div></div></div><div class="fr"><div class="fg"><label>Nama Wajib Pajak <span class="r">*</span></label><input type="text" id="f-namawp" placeholder="Nama sesuai SPPT"><div class="er" id="e-namawp">Nama WP wajib diisi</div></div><div class="fg"><label>Tahun Pajak Terakhir <span class="r">*</span></label><select id="f-tahun"><option value="">— Pilih Tahun —</option></select><div class="er" id="e-tahun">Tahun wajib dipilih</div></div></div><div class="fr"><div class="fg"><label>Luas Tanah (m²)</label><input type="number" id="f-ltanah" placeholder="150" min="0"></div><div class="fg"><label>Luas Bangunan (m²)</label><input type="number" id="f-lbangunan" placeholder="80" min="0"></div></div><div class="fr full"><div class="fg"><label>Letak / Alamat Objek Pajak <span class="r">*</span></label><textarea id="f-letak" placeholder="Banjar, Desa, Kecamatan, Kota/Kab"></textarea><div class="er" id="e-letak">Letak objek wajib diisi</div></div></div></div></div>
+  <div class="fb"><div class="fbh"><div class="fbn">3</div><h3>Alasan &amp; Pernyataan</h3><em>Alasan &amp; komitmen</em></div><div class="fbd"><div class="fr full" style="margin-bottom:18px"><div class="fg"><label>Alasan Mengaktifkan PBB-P2 <span class="r">*</span></label><textarea id="f-keperluan" style="min-height:85px" placeholder="Tuliskan alasan..."></textarea><div class="er" id="e-keperluan">Alasan wajib diisi (min. 20 karakter)</div></div></div><div class="dv"></div><div style="font-size:12px;font-weight:600;color:var(--i2);margin-bottom:8px">Pernyataan Pemohon <span style="color:var(--red)">*</span></div><div class="cks"><div class="ck"><input type="checkbox" id="p1"><label for="p1">Saya menyatakan bahwa seluruh data yang diisi <strong>benar dan dapat dipertanggungjawabkan</strong>.</label></div><div class="ck"><input type="checkbox" id="p2"><label for="p2">Saya berkomitmen untuk <strong>membayar seluruh tagihan PBB-P2 yang masih terutang</strong> setelah buka blokir berhasil diproses.</label></div></div><div class="er" id="e-p" style="margin-top:6px">Kedua pernyataan wajib disetujui</div></div></div>
+  <div class="fb"><div class="fbh"><div class="fbn">4</div><h3>Tanda Tangan Pemohon</h3><em>Wajib</em></div><div class="fbd"><div style="font-size:12px;font-weight:600;color:var(--i2);margin-bottom:8px">Tanda Tangan <span style="color:var(--red)">*</span></div><canvas id="ttd-cv" class="ttd-canvas" width="700" height="200"></canvas><div class="ttd-ctrl"><button class="btn bg2" style="padding:6px 14px;font-size:12px" onclick="clearTTD()">Hapus &amp; Ulangi</button><span class="ttd-st" id="ttd-st">Belum ada tanda tangan</span></div><div class="er" id="e-ttd" style="margin-top:6px">Tanda tangan wajib dibubuhkan</div></div></div>
+  <div style="background:var(--sur);border:1px solid var(--bor);border-radius:12px;overflow:hidden"><div class="ff"><p>Data &amp; tanda tangan tersimpan di Spreadsheet.</p><button class="btn br" id="btn-sub" onclick="doSubmit()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z"/></svg>Submit Permohonan</button></div></div>
+  </form>
+</div>
+
+<!-- SIMULASI -->
+<div class="pg" id="pg-simulasi">
+  <div class="sim-wrap">
+    <div class="sim-head">
+      <h2>Simulasi Tagihan PBB-P2</h2>
+      <p>Estimasi tagihan berdasarkan tabel NJOP resmi Kabupaten Tabanan. Kenaikan NJOP mengikuti penyesuaian per periode.</p>
+    </div>
+    <div class="sim-card">
+      <div class="sc-head"><div class="fbn blue" style="width:22px;height:22px;font-size:11px">1</div><h3>Data Input Simulasi</h3><em>Sesuai SPPT tahun terakhir Anda</em></div>
+      <div class="sc-body">
+        <div class="fr">
+          <div class="fg">
+            <label>Nomor Objek Pajak (NOP) <span class="r">*</span></label>
+            <input type="text" id="s-nop" placeholder="Wajib diisi — 9 digit pertama menentukan kenaikan" maxlength="25" oninput="fmtNOPsim(this)">
+            <div class="ht">Masukkan NOP untuk mengetahui jenis kenaikan NJOP</div>
+            <div class="er" id="e-s-nop">NOP wajib diisi (min. 9 digit)</div>
+          </div>
+          <div class="fg">
+            <label>Tahun Pajak Terakhir <span class="r">*</span></label>
+            <select id="s-tahun"><option value="">— Pilih Tahun —</option></select>
+            <div class="ht">Tahun SPPT terakhir yang Anda bayarkan</div>
+          </div>
+        </div>
+        <div class="fr">
+          <div class="fg">
+            <label>Luas Bumi / Tanah (m²) <span class="r">*</span></label>
+            <input type="number" id="s-bumi" placeholder="Contoh: 200" min="1">
+          </div>
+          <div class="fg">
+            <label>Luas Bangunan (m²)</label>
+            <input type="number" id="s-bgn" placeholder="0 jika tidak ada" min="0" value="0">
+          </div>
+        </div>
+        <div class="fr">
+          <div class="fg">
+            <label>NJOP Bumi per m² (sesuai SPPT terakhir) <span class="r">*</span></label>
+            <select id="s-njopbumi"><option value="">— Pilih nilai NJOP Bumi —</option></select>
+            <div class="ht">Pilih nilai yang sesuai dengan SPPT Anda</div>
+            <div class="er" id="e-njopbumi">NJOP Bumi wajib dipilih</div>
+          </div>
+          <div class="fg">
+            <label>NJOP Bangunan per m² (sesuai SPPT terakhir)</label>
+            <select id="s-njopbgn"><option value="0">— Tidak ada bangunan —</option></select>
+            <div class="ht">Biarkan jika tidak ada bangunan</div>
+          </div>
+        </div>
+        <div class="fr">
+          <div class="fg">
+            <label>Peruntukan</label>
+            <select id="s-peruntukan">
+              <option value="umum">Umum</option>
+              <option value="khusus">Khusus</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Info Penyesuaian NJOP</label>
+            <div id="s-info" style="background:var(--bg);border:1px solid var(--bor);border-radius:8px;padding:9px 12px;font-size:12px;color:var(--i2);line-height:1.9;min-height:54px"><span style="color:var(--i3)">Isi NOP untuk melihat info</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="sim-err" style="display:none;background:var(--rs);border:1px solid var(--rm);border-radius:8px;padding:11px 14px;font-size:12px;color:var(--red);margin-bottom:14px"></div>
+    <div style="text-align:center;margin-bottom:24px">
+      <button class="btn bblue" style="padding:12px 36px;font-size:14px" onclick="hitungSimulasi()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h4M7 12h8M7 16h3"/></svg>
+        Hitung Simulasi Tagihan
+      </button>
+    </div>
+    <div id="hasil-sim" style="display:none"></div>
+  </div>
+</div>
+
+<!-- STATUS -->
+<div class="pg" id="pg-status">
+  <div class="sw">
+    <div style="margin-bottom:20px"><h2 style="font-size:17px;font-weight:600;margin-bottom:3px">Cek Status Permohonan</h2><p style="font-size:13px;color:var(--i3)">Masukkan Nomor Surat dan No HP</p></div>
+    <div class="sc2"><div class="sch"><h2>Verifikasi Identitas</h2><p>Kedua data harus sesuai dengan data saat pengajuan</p></div><div class="scb"><div class="fg" style="margin-bottom:12px"><label>Nomor Surat <span class="r">*</span></label><input type="text" id="ck-n" placeholder="Contoh: NOP-20260001" style="font-family:'DM Mono',monospace" oninput="this.value=this.value.toUpperCase()"></div><div class="fg" style="margin-bottom:16px"><label>Nomor HP <span class="r">*</span></label><input type="tel" id="ck-h" placeholder="Nomor HP yang didaftarkan" maxlength="15"></div><div id="ck-e" style="display:none;font-size:12px;color:var(--red);background:var(--rs);border:1px solid var(--rm);border-radius:7px;padding:9px 12px;margin-bottom:12px"></div><button class="btn br" style="width:100%;justify-content:center" id="btn-ck" onclick="doCek()">Cek Status</button><div id="ck-r" style="display:none;margin-top:16px"></div></div></div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="pg" id="pg-admin">
+  <div id="adm-in"><div class="ag"><div style="margin-bottom:20px"><h2 style="font-size:17px;font-weight:600;margin-bottom:3px">Ruang Kerja Petugas</h2><p style="font-size:13px;color:var(--i3)">Masukkan kredensial untuk mengakses panel</p></div><div class="lc"><div class="lch"><div class="lci"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><h3>Login Petugas BKD Tabanan</h3></div><div class="lcb"><div class="fg" style="margin-bottom:12px"><label>Username</label><input type="text" id="a-u" placeholder="Username" autocomplete="off"></div><div class="fg" style="margin-bottom:16px"><label>Password</label><input type="password" id="a-p" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()"></div><div id="a-e" style="display:none;font-size:12px;color:var(--red);background:var(--rs);border:1px solid var(--rm);border-radius:7px;padding:9px 12px;margin-bottom:12px"></div><button class="btn br" style="width:100%;justify-content:center" id="btn-li" onclick="doLogin()">Masuk</button></div></div></div></div>
+  <div id="adm-panel" style="display:none">
+    <div class="pb"><div><h2>Panel Kerja Petugas</h2><p>Bidang PBB &amp; BPHTB — BKD Kabupaten Tabanan</p></div><button class="btn bg2" onclick="doLogout()">Keluar</button></div>
+    <div class="sts"><div class="sb2"><div class="sn2" id="st-t">–</div><div class="sl2">Total</div></div><div class="sb2"><div class="sn2 wn" id="st-w">–</div><div class="sl2">Menunggu</div></div><div class="sb2"><div class="sn2 on" id="st-s">–</div><div class="sl2">Selesai</div></div></div>
+    <div class="sr"><input type="text" id="a-cari" placeholder="Cari nomor surat, nama, NOP..." oninput="TBL_PAGE=1;renderTbl()"><button class="btn br" onclick="renderTbl()">Cari</button><button class="btn bg2" onclick="loadData()">Muat Ulang</button></div>
+    <div class="tw" id="a-tbl"></div>
+  </div>
+</div>
+</main>
+
+<div class="so" id="so"><div class="sbox"><div class="si"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div><h2>Permohonan Berhasil!</h2><p>Data dan tanda tangan tersimpan di sistem.</p><div class="nb2" id="so-n">—</div><div class="info-box"><strong>Simpan nomor ini!</strong> Untuk cek status &amp; cetak surat kapan saja.</div><p style="font-size:12px;color:var(--i3)">Email: <strong id="so-e"></strong></p><div class="sa"><button class="btn bw" onclick="goStatusAfterSuc()">Cek &amp; Cetak Surat</button><button class="btn br" onclick="closeSuc()">Selesai</button></div></div></div>
+<div class="ov" id="mod-ov"><div class="mb"><div class="mh"><h3 id="mod-ttl">Detail</h3><button class="mcl" onclick="closeMod()">&times;</button></div><div class="md" id="mod-bd"></div><div class="mft"><button class="btn bg2" onclick="closeMod()">Tutup</button><button class="btn bw" onclick="printFromMod()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Cetak</button><button class="btn br" id="btn-save" onclick="doUpdate()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>Simpan</button></div></div></div>
+
+<script>
+var GAS='https://script.google.com/macros/s/AKfycbwFyMBwoJDxVexGg4lotIeJIppEUq5h0YPOI4oBZjwfC8BAQofQCf5UMhSDFr6-Qi92kQ/exec';
+var TOKEN='',USERNAME='',ADM_DATA=[],CUR_ROW=null,LAST_NOM='';
+var ttdOk=false;
+
+// ═══════════════════════════════════════════════════════════
+//  TABEL NJOP 48 TINGKAT
+// ═══════════════════════════════════════════════════════════
+var TBL=[0,
+  2450,4100,5000,7150,10000,14000,20000,27000,36000,48000,
+  64000,82000,103000,128000,160000,200000,243000,285000,335000,394000,
+  464000,537000,614000,702000,802000,916000,1032000,1147000,1274000,1416000,
+  1573000,1722000,1862000,2013000,2176000,2352000,2508000,2640000,2779000,2925000,
+  3100000,3375000,3745000,4155000,4605000,5095000,5625000,6195000
+];
+var MAX_TK=48, NJOPTKP=10000000;
+
+// ═══════════════════════════════════════════════════════════
+//  TABEL PENGELOMPOKAN NJOP BUMI (Tingkat 1–52)
+//  Format: [tingkat, batas_bawah_eksklusif, batas_atas_inklusif, njop]
+//  Digunakan untuk menentukan NJOP P3:
+//    1. Hitung nilai pengelompokan = NJOP P2 (Rp/m²) × 5
+//    2. Cari range yang memuat nilai pengelompokan tersebut
+//    3. Ambil nilai NJOP (kolom 3) sebagai NJOP P3
+// ═══════════════════════════════════════════════════════════
+var TBL_PGLP=[
+  // [batas_bawah_eksklusif, batas_atas_inklusif, njop]
+  [2900,   3500,   4100],   // tingkat 1  — catatan: batas atas 3500 sesuai tabel asli
+  [4100,   5900,   5000],   // tingkat 2
+  [5900,   8400,   7150],   // tingkat 3
+  [8400,   12000,  10000],  // tingkat 4
+  [12000,  17000,  14000],  // tingkat 5
+  [17000,  23000,  20000],  // tingkat 6
+  [23000,  31000,  27000],  // tingkat 7
+  [31000,  41000,  36000],  // tingkat 8
+  [41000,  55000,  48000],  // tingkat 9
+  [55000,  73000,  64000],  // tingkat 10
+  [73000,  91000,  82000],  // tingkat 11
+  [91000,  114000, 103000], // tingkat 12
+  [114000, 142000, 128000], // tingkat 13
+  [142000, 178000, 160000], // tingkat 14
+  [178000, 223000, 200000], // tingkat 15
+  [223000, 262000, 243000], // tingkat 16
+  [262000, 308000, 285000], // tingkat 17
+  [308000, 362000, 335000], // tingkat 18
+  [362000, 426000, 394000], // tingkat 19
+  [426000, 501000, 464000], // tingkat 20
+  [501000, 573000, 537000], // tingkat 21
+  [573000, 655000, 614000], // tingkat 22
+  [655000, 748000, 702000], // tingkat 23
+  [748000, 855000, 802000], // tingkat 24
+  [855000, 977000, 916000], // tingkat 25
+  [977000,    1086000, 1032000], // tingkat 26
+  [1086000,   1207000, 1147000], // tingkat 27
+  [1207000,   1341000, 1274000], // tingkat 28
+  [1341000,   1490000, 1416000], // tingkat 29
+  [1490000,   1655000, 1573000], // tingkat 30
+  [1655000,   1789000, 1722000], // tingkat 31
+  [1789000,   1934000, 1862000], // tingkat 32
+  [1934000,   2091000, 2013000], // tingkat 33
+  [2091000,   2261000, 2176000], // tingkat 34
+  [2261000,   2444000, 2352000], // tingkat 35
+  [2444000,   2573000, 2508000], // tingkat 36
+  [2573000,   2708000, 2640000], // tingkat 37
+  [2708000,   2850000, 2779000], // tingkat 38
+  [2850000,   3000000, 2925000], // tingkat 39
+  [3000000,   3200000, 3100000], // tingkat 40
+  [3200000,   3550000, 3375000], // tingkat 41
+  [3550000,   3940000, 3745000], // tingkat 42
+  [3940000,   4370000, 4155000], // tingkat 43
+  [4370000,   4840000, 4605000], // tingkat 44
+  [4840000,   5350000, 5095000], // tingkat 45
+  [5350000,   5900000, 5625000], // tingkat 46
+  [5900000,   6490000, 6195000], // tingkat 47
+  [6490000,   7120000, 6805000], // tingkat 48
+  [7120000,   7790000, 7455000], // tingkat 49
+  [7790000,   8500000, 8145000], // tingkat 50
+  [8500000,   9250000, 8875000], // tingkat 51
+  [9250000,   10040000,9645000]  // tingkat 52
+];
+
+// Mencari NJOP dari tabel pengelompokan berdasarkan nilai rupiah input
+// Jika nilai melebihi semua range, pakai NJOP tertinggi (tingkat 52)
+// Jika nilai di bawah semua range, pakai NJOP terendah (tingkat 1)
+function getNJOPdariPengelompokan(nilaiRupiah){
+  for(var i=0;i<TBL_PGLP.length;i++){
+    var bawah=TBL_PGLP[i][0], atas=TBL_PGLP[i][1], njop=TBL_PGLP[i][2];
+    if(nilaiRupiah>bawah && nilaiRupiah<=atas) return njop;
+  }
+  // Di atas range tertinggi → pakai NJOP tingkat 52
+  if(nilaiRupiah>TBL_PGLP[TBL_PGLP.length-1][1]) return TBL_PGLP[TBL_PGLP.length-1][2];
+  // Di bawah range terendah → pakai NJOP tingkat 1
+  return TBL_PGLP[0][2];
+}
+
+// ═══════════════════════════════════════════════════════════
+//  ISI DROPDOWN BUMI — tampilkan angka tanpa satuan
+// ═══════════════════════════════════════════════════════════
+// Tabel NJOP Bangunan per tingkat (23 tingkat, nilai Rp/m²)
+var TBL_BGN=[
+  {tk:1,  njop:132000},
+  {tk:2,  njop:162000},
+  {tk:3,  njop:191000},
+  {tk:4,  njop:225000},
+  {tk:5,  njop:264000},
+  {tk:6,  njop:310000},
+  {tk:7,  njop:365000},
+  {tk:8,  njop:429000},
+  {tk:9,  njop:505000},
+  {tk:10, njop:595000},
+  {tk:11, njop:700000},
+  {tk:12, njop:823000},
+  {tk:13, njop:968000},
+  {tk:14, njop:1200000},
+  {tk:15, njop:1516000},
+  {tk:16, njop:1833000},
+  {tk:17, njop:2200000},
+  {tk:18, njop:2625000},
+  {tk:19, njop:3100000},
+  {tk:20, njop:3625000},
+  {tk:21, njop:4200000},
+  {tk:22, njop:4825000},
+  {tk:23, njop:5500000}
+];
+(function(){
+  function fmtAngka(n){return n.toLocaleString('id-ID');}
+  var sb=document.getElementById('s-njopbumi');
+  var sg=document.getElementById('s-njopbgn');
+  // Bumi: dari TBL (48 tingkat), format angka biasa
+  for(var t=MAX_TK;t>=1;t--){
+    var ob=document.createElement('option');ob.value=t;ob.textContent=fmtAngka(TBL[t]);sb.appendChild(ob);
+  }
+  // Bangunan: dari TBL_BGN (23 tingkat), format angka biasa
+  for(var b=TBL_BGN.length-1;b>=0;b--){
+    var og=document.createElement('option');og.value=TBL_BGN[b].tk;og.textContent=fmtAngka(TBL_BGN[b].njop);sg.appendChild(og);
+  }
+})();
+
+// ═══════════════════════════════════════════════════════════
+//  LOGIKA KENAIKAN NJOP PER PERIODE
+//  P1 (2014–2019) : tingkat SAMA, tidak naik
+//  P2 (2020–2023) : naik N tingkat SEKALI untuk seluruh periode
+//  P3 (2024–2026) : Nilai Pengelompokan = NJOP P2 × 5, kemudian
+//                   NJOP P3 ditentukan dari tabel pengelompokan
+//                   sesuai range yang memuat nilai tersebut
+//  N=1 jika NOP prefix 5102030 atau 5102040, N=2 lainnya
+// ═══════════════════════════════════════════════════════════
+function getNaikTk(nopRaw){
+  var p=nopRaw.substring(0,7);
+  return(p==='5102030'||p==='5102040')?1:2;
+}
+function updateInfo(){
+  var raw=document.getElementById('s-nop').value.replace(/\D/g,'');
+  var el=document.getElementById('s-info');
+  if(raw.length<7){el.innerHTML='<span style="color:var(--i3)">Isi NOP minimal 9 digit</span>';return;}
+  var n=getNaikTk(raw);
+  var warna=n===1?'var(--blue)':'var(--red)';
+  el.innerHTML=
+    '<div>Periode 1 (2014–2019): <strong>Tidak ada kenaikan</strong></div>'+
+    '<div>Periode 2 (2020–2023): Naik <strong style="color:'+warna+'">'+n+' tingkat</strong> (sekali per periode)</div>'+
+    '<div>Periode 3 (2024–2026): Nilai Pengelompokan = NJOP P2 <strong>× 5</strong> → NJOP P3 dari tabel range</div>';
+}
+
+// ═══════════════════════════════════════════════════════════
+//  HITUNG SIMULASI
+//
+//  RUMUS PER PERIODE (sudah diverifikasi dengan SPPT 2026):
+//  PBB = Tarif × NJKP% × (NJOP Total − NJOPTKP)
+//
+//  Tarif  : 0,1% jika NJOP Total ≤ Rp 1 Miliar
+//           0,2% jika NJOP Total > Rp 1 Miliar
+//
+//  NJKP%  :
+//   P1 (2014–2019) : 100% (Umum & Khusus)
+//   P2 (2020–2023) : 100% (Umum & Khusus)
+//   P3 (2024–2026) : 20% Umum | 80% Khusus
+//
+//  Verifikasi SPPT 2026 contoh:
+//   NJOP Total = 3300×243.000 = 801.900.000
+//   NJOPTKP    = 10.000.000
+//   NJOPkena   = 791.900.000
+//   Tarif      = 0,1% (≤1M)
+//   NJKP       = 20% → 158.380.000
+//   PBB        = 0,1% × 158.380.000 = 158.380 ✓
+// ═══════════════════════════════════════════════════════════
+function hitungSimulasi(){
+  var errEl=document.getElementById('sim-err');
+  var hasilEl=document.getElementById('hasil-sim');
+  errEl.style.display='none';hasilEl.style.display='none';
+
+  var nopRaw   =document.getElementById('s-nop').value.replace(/\D/g,'');
+  var tahunAwal=parseInt(document.getElementById('s-tahun').value);
+  var luasBumi =parseFloat(document.getElementById('s-bumi').value)||0;
+  var luasBgn  =parseFloat(document.getElementById('s-bgn').value)||0;
+  var tkBumi   =parseInt(document.getElementById('s-njopbumi').value)||0;
+  var tkBgn    =parseInt(document.getElementById('s-njopbgn').value)||0;
+  var perunt   =document.getElementById('s-peruntukan').value;
+
+  if(nopRaw.length<7){errEl.textContent='NOP wajib diisi (min. 9 digit).';errEl.style.display='block';return;}
+  if(!tahunAwal)     {errEl.textContent='Tahun pajak terakhir wajib dipilih.';errEl.style.display='block';return;}
+  if(!luasBumi)      {errEl.textContent='Luas bumi wajib diisi.';errEl.style.display='block';return;}
+  if(!tkBumi)        {errEl.textContent='NJOP Bumi wajib dipilih.';errEl.style.display='block';return;}
+
+  var N=getNaikTk(nopRaw);
+
+  // Tentukan tingkat P1 dan P2 berdasarkan input user
+  var tkP1,tkP2;
+  if(tahunAwal<=2019){
+    tkP1=tkBumi;
+    tkP2=Math.min(MAX_TK,tkP1+N);
+  } else if(tahunAwal<=2023){
+    tkP2=tkBumi;
+    tkP1=Math.max(1,tkP2-N);
+  } else {
+    // Input ada di P3 (2024-2026): mundurkan
+    // NJOP P3 adalah hasil lookup dari tabel pengelompokan
+    // Untuk mundur: cari nilai pengelompokan yang menghasilkan NJOP P3 = TBL[tkBumi]
+    // yaitu nilai pengelompokan di range yang sesuai, lalu bagi 5 untuk dapatkan NJOP P2
+    // Pendekatan: cari NJOP P2 yang jika dikalikan 5 akan menghasilkan range
+    // yang memuat nilai sehingga getNJOPdariPengelompokan hasilnya = TBL[tkBumi]
+    var targetNjopP3=TBL[tkBumi];
+    var closest=1;
+    for(var t=1;t<=MAX_TK;t++){
+      var candidateNilaiPglp=TBL[t]*5;
+      var candidateNjopP3=getNJOPdariPengelompokan(candidateNilaiPglp);
+      var closestNilaiPglp=TBL[closest]*5;
+      var closestNjopP3=getNJOPdariPengelompokan(closestNilaiPglp);
+      if(Math.abs(candidateNjopP3-targetNjopP3)<Math.abs(closestNjopP3-targetNjopP3))closest=t;
+    }
+    tkP2=closest;
+    tkP1=Math.max(1,tkP2-N);
+  }
+
+  var njopBumiP1=TBL[tkP1];           // nilai Rp/m² periode 1
+  var njopBumiP2=TBL[tkP2];           // nilai Rp/m² periode 2
+  // P3: NJOP P2 × 5 = nilai pengelompokan → cari NJOP P3 dari tabel range
+  var nilaiPengelompokanP3=njopBumiP2*5;
+  var njopBumiP3=getNJOPdariPengelompokan(nilaiPengelompokanP3);
+
+  // NJOP Bangunan: TETAP di semua periode, lookup dari TBL_BGN
+  var njopBgnPerM2=0;
+  if(tkBgn){var bgnEntry=TBL_BGN.find(function(x){return x.tk===tkBgn;});if(bgnEntry)njopBgnPerM2=bgnEntry.njop;}
+
+  var rows=[],totalBelumLunas=0;
+
+  for(var tahun=2014;tahun<=2026;tahun++){
+    var njopBumiPerM2,periode;
+    if(tahun<=2019)     {njopBumiPerM2=njopBumiP1;periode=1;}
+    else if(tahun<=2023){njopBumiPerM2=njopBumiP2;periode=2;}
+    else                {njopBumiPerM2=njopBumiP3;periode=3;}
+
+    var njopBumiTotal=luasBumi*njopBumiPerM2;
+    var njopBgnTotal =luasBgn *njopBgnPerM2;
+    var njopTotal    =njopBumiTotal+njopBgnTotal;
+    var njopKP       =Math.max(njopTotal-NJOPTKP,0);
+
+    // Tarif berdasarkan NJOP Total
+    var tarif=njopTotal>1000000000?0.002:0.001;
+
+    // NJKP berdasarkan periode DAN peruntukan
+    var njkpPct;
+    if(periode<=2){
+      // P1 dan P2: selalu 100% (Umum maupun Khusus)
+      njkpPct=1.00;
+    } else {
+      // P3: 20% Umum, 80% Khusus
+      njkpPct=perunt==='khusus'?0.80:0.20;
+    }
+
+    var pbb=Math.round(tarif*njkpPct*njopKP);
+
+    var isPaid=tahun<tahunAwal;
+    if(!isPaid)totalBelumLunas+=pbb;
+
+    rows.push({
+      tahun:tahun,periode:periode,
+      luasBumi:luasBumi,luasBgn:luasBgn,
+      njopBumiPerM2:njopBumiPerM2,
+      njopBgnPerM2:njopBgnPerM2,
+      njopTotal:njopTotal,
+      tarif:tarif,njkpPct:njkpPct,pbb:pbb,
+      isPaid:isPaid,isAwal:tahun===tahunAwal
+    });
+  }
+
+  renderHasil(rows,totalBelumLunas,tahunAwal,N,njopBumiP1,njopBumiP2,njopBumiP3,perunt);
+}
+
+function rp(n){return 'Rp '+Math.round(n).toLocaleString('id-ID');}
+function rpK(n){
+  if(n>=1e9)return 'Rp '+(n/1e9).toFixed(3).replace(/\.?0+$/,'')+' M';
+  if(n>=1e6)return 'Rp '+(n/1e6).toFixed(3).replace(/\.?0+$/,'')+' Jt';
+  if(n>=1e3)return 'Rp '+(n/1e3).toFixed(0)+' rb';
+  return 'Rp '+Math.round(n).toLocaleString('id-ID');
+}
+
+function renderHasil(rows,totalBelumLunas,tahunAwal,N,njopP1,njopP2,njopP3,perunt){
+  var jmlBelumLunas=rows.filter(function(r){return !r.isPaid;}).length;
+  var totalPBB=rows.reduce(function(s,r){return s+r.pbb;},0);
+  var njkpP3Label=perunt==='khusus'?'80% (Khusus)':'20% (Umum)';
+
+  var html='<div class="hasil-wrap">';
+
+  // HERO
+  html+='<div class="hero-card">'
+    +'<h3>Estimasi Total Tagihan Belum Lunas</h3>'
+    +'<div class="hero-total">'+rp(totalBelumLunas)+'</div>'
+    +'<div class="hero-sub">Tahun '+tahunAwal+' – 2026 &nbsp;|&nbsp; '+jmlBelumLunas+' tahun belum lunas</div>'
+    +'<div class="hero-stats">'
+    +'<div class="hs"><div class="hl">NJOP Bumi 2014–2019</div><div class="hv">'+rpK(njopP1)+'/m²</div></div>'
+    +'<div class="hs"><div class="hl">NJOP Bumi 2020–2023</div><div class="hv">'+rpK(njopP2)+'/m² (+'+N+' tkt)</div></div>'
+    +'<div class="hs"><div class="hl">NJOP Bumi 2024–2026</div><div class="hv">'+rpK(njopP3)+'/m² (pengelompokan)</div></div>'
+    +'</div></div>';
+
+  // TABEL
+  html+='<div class="tbl-card">'
+    +'<div class="tbl-head-bar">Rincian Tagihan Per Tahun 2014–2026</div>'
+    +'<div class="tbl-scroll"><table class="rt">'
+    +'<thead><tr>'
+    +'<th>Tahun</th>'
+    +'<th>Luas Bumi (m²)</th>'
+    +'<th>Luas Bgn (m²)</th>'
+    +'<th>NJOP Bumi/m²</th>'
+    +'<th>NJOP Bgn/m²</th>'
+    +'<th style="color:var(--blue)">Total Bayar (PBB)</th>'
+    +'</tr></thead><tbody>';
+
+  rows.forEach(function(r){
+    var p3cls=perunt==='khusus'?'row-p3k':'row-p3u';
+    var rowCls=r.isPaid?'row-lunas':(r.isAwal?'row-awal':(r.periode===3?p3cls:(r.periode===2?'row-p2':'')));
+    var tagTahun=r.isPaid
+      ?'<span class="tag tg-lunas">Lunas</span>'
+      :(r.isAwal?'<span class="tag tg-awal">Terakhir</span>':'<span class="tag tg-blm">Belum</span>');
+
+    var njopBLabel=rp(r.njopBumiPerM2);
+    if(r.periode===2)njopBLabel+=' <span style="font-size:10px;color:var(--blue)">●P2</span>';
+    if(r.periode===3)njopBLabel+=' <span style="font-size:10px;color:'+(perunt==='khusus'?'#C0181A':'#1B7F4C')+'">●P3</span>';
+
+    html+='<tr class="'+rowCls+'">'
+      +'<td>'+r.tahun+' '+tagTahun+'</td>'
+      +'<td>'+r.luasBumi.toLocaleString('id-ID')+'</td>'
+      +'<td>'+(r.luasBgn>0?r.luasBgn.toLocaleString('id-ID'):'—')+'</td>'
+      +'<td>'+njopBLabel+'</td>'
+      +'<td>'+(r.njopBgnPerM2>0?rp(r.njopBgnPerM2):'—')+'</td>'
+      +'<td style="font-weight:700;color:'+(r.isPaid?'var(--i3)':'var(--blue)')+'">'+rp(r.pbb)+'</td>'
+      +'</tr>';
+  });
+
+  html+='</tbody>'
+    +'<tfoot>'
+    +'<tr><td colspan="5" style="text-align:right">Total Estimasi Semua Tahun (2014–2026)</td><td style="color:var(--blue)">'+rp(totalPBB)+'</td></tr>'
+    +'<tr style="background:linear-gradient(90deg,var(--bs),#fff)"><td colspan="5" style="text-align:right;font-size:13px">Total Belum Lunas ('+tahunAwal+'–2026)</td><td style="color:var(--blue);font-size:14px">'+rp(totalBelumLunas)+'</td></tr>'
+    +'</tfoot></table></div></div>';
+
+  // KETERANGAN
+  html+='<div class="keterangan">'
+    +'<div><strong>Keterangan warna &amp; periode:</strong></div>'
+    +'<div class="leg">'
+    +'<div class="leg-item"><div class="leg-dot" style="background:var(--bg);border:1px solid var(--bor)"></div>Sudah Lunas</div>'
+    +'<div class="leg-item"><div class="leg-dot" style="background:var(--wb)"></div>Tahun Terakhir</div>'
+    +'<div class="leg-item"><div class="leg-dot" style="background:#F0F7FF"></div>Periode 2 (2020–2023) +'+N+' tingkat</div>'
+    +'<div class="leg-item"><div class="leg-dot" style="background:'+(perunt==='khusus'?'#FFF0F5':'#F0FFF4')+'"></div>Periode 3 (2024–2026) pengelompokan ×5 | NJKP '+njkpP3Label+'</div>'
+    +'</div>'
+    +'<div style="margin-top:10px;font-size:11px;color:var(--i3)">⚠️ <strong>Estimasi</strong> — tagihan resmi sesuai SPPT yang diterbitkan BKD. NJOP Bangunan tetap di semua periode. Denda keterlambatan belum termasuk.</div>'
+    +'</div>';
+
+  html+='<div style="display:flex;gap:10px;justify-content:center;padding:4px 0 16px;flex-wrap:wrap">'
+    +'<button class="btn br" onclick="gP2(\'formulir\')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>Ajukan Permohonan</button>'
+    +'<button class="btn bg2" onclick="resetSim()">Hitung Ulang</button>'
+    +'</div></div>';
+
+  var el=document.getElementById('hasil-sim');
+  el.innerHTML=html;el.style.display='block';
+  el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetSim(){
+  document.getElementById('hasil-sim').style.display='none';
+  ['s-tahun','s-njopbumi','s-njopbgn'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('s-bumi').value='';
+  document.getElementById('s-bgn').value='0';
+  document.getElementById('s-nop').value='';
+  document.getElementById('s-info').innerHTML='<span style="color:var(--i3)">Isi NOP untuk melihat info</span>';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ═══════════════════════════════════════════════════════════
+//  NAV & UTILS
+// ═══════════════════════════════════════════════════════════
+function gP(id,btn){
+  document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.nb').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('pg-'+id).classList.add('active');
+  if(btn)btn.classList.add('active');
+  if(id==='admin'&&document.getElementById('adm-panel').style.display!=='none')loadData();
+}
+function gP2(id){
+  document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.nb').forEach(function(b){
+    b.classList.remove('active');
+    var t=b.textContent.toLowerCase();
+    if((id==='formulir'&&t.includes('permohonan'))||(id==='simulasi'&&t.includes('simulasi'))||(id==='status'&&t.includes('status')))b.classList.add('active');
+  });
+  document.getElementById('pg-'+id).classList.add('active');
+  // Auto-fill email jika ada email tersimpan dari sesi sebelumnya
+  if(id==='formulir'){
+    var saved=localStorage.getItem('pbb_last_email');
+    var fel=document.getElementById('f-email');
+    if(saved&&fel&&!fel.value)fel.value=saved;
+  }
+}
+(function(){
+  var s=document.getElementById('f-tahun'),s2=document.getElementById('s-tahun');
+  for(var y=2025;y>=2014;y--){
+    var o=document.createElement('option');o.value=y;o.textContent=y;s.appendChild(o);
+    var o2=document.createElement('option');o2.value=y;o2.textContent=y;s2.appendChild(o2);
+  }
+})();
+function fmtNOP(inp){
+  var raw=inp.value.replace(/\D/g,'').substring(0,18);
+  var off=[0,2,4,7,10,13,17],ln=[2,2,3,3,3,4,1];
+  inp.value=off.map(function(o,i){return raw.substr(o,ln[i]);}).filter(function(p){return p;}).join('.');
+  var pad=['00','00','000','000','000','0000','0'];
+  document.getElementById('nop-d').textContent=pad.map(function(p,i){return raw.length>off[i]?raw.substr(off[i],ln[i])||p:p;}).join('.');
+}
+function fmtNOPsim(inp){
+  var raw=inp.value.replace(/\D/g,'').substring(0,18);
+  var off=[0,2,4,7,10,13,17],ln=[2,2,3,3,3,4,1];
+  inp.value=off.map(function(o,i){return raw.substr(o,ln[i]);}).filter(function(p){return p;}).join('.');
+  updateInfo();
+}
+function rawNOP(){return document.getElementById('f-nop').value.replace(/\D/g,'');}
+(function(){
+  var cv=document.getElementById('ttd-cv'),ctx=cv.getContext('2d');
+  ctx.strokeStyle='#111';ctx.lineWidth=2;ctx.lineCap='round';ctx.lineJoin='round';
+  var drawing=false,lx=0,ly=0;
+  function pos(e){var r=cv.getBoundingClientRect(),sx=cv.width/r.width,sy=cv.height/r.height;if(e.touches)return{x:(e.touches[0].clientX-r.left)*sx,y:(e.touches[0].clientY-r.top)*sy};return{x:(e.clientX-r.left)*sx,y:(e.clientY-r.top)*sy};}
+  function start(e){e.preventDefault();drawing=true;var p=pos(e);lx=p.x;ly=p.y;}
+  function move(e){e.preventDefault();if(!drawing)return;var p=pos(e);ctx.beginPath();ctx.moveTo(lx,ly);ctx.lineTo(p.x,p.y);ctx.stroke();lx=p.x;ly=p.y;ttdOk=true;document.getElementById('ttd-st').textContent='Tanda tangan terekam ✓';document.getElementById('ttd-st').style.color='var(--ok)';}
+  function stop(){drawing=false;}
+  cv.addEventListener('mousedown',start);cv.addEventListener('mousemove',move);cv.addEventListener('mouseup',stop);cv.addEventListener('mouseleave',stop);
+  cv.addEventListener('touchstart',start,{passive:false});cv.addEventListener('touchmove',move,{passive:false});cv.addEventListener('touchend',stop);
+})();
+function clearTTD(){var cv=document.getElementById('ttd-cv');cv.getContext('2d').clearRect(0,0,cv.width,cv.height);ttdOk=false;document.getElementById('ttd-st').textContent='Belum ada tanda tangan';document.getElementById('ttd-st').style.color='var(--i3)';}
+// CATATAN UNTUK GAS (Google Apps Script):
+// Payload submit mengandung field "emailBody" dengan placeholder "[NOMOR]".
+// Setelah nomor surat diterbitkan, GAS harus:
+//   1. Replace "[NOMOR]" di emailBody dengan nomor surat yang baru dibuat
+//   2. Kirim email ke payload.email dengan:
+//      Subject : "Konfirmasi Permohonan Buka Blokir PBB – " + nomor
+//      Body    : emailBody yang sudah di-replace
+// Contoh GAS: MailApp.sendEmail(payload.email, subject, emailBody.replace('[NOMOR]', nomor));
+function api(p,cb){fetch(GAS,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(p)}).then(function(r){return r.json();}).then(function(d){cb(null,d);}).catch(function(){apiJSONP(p,cb);});}
+function apiJSONP(p,cb){var cn='cb_'+Date.now()+'_'+Math.floor(Math.random()*9999),sc=document.createElement('script');var t=setTimeout(function(){delete window[cn];sc.remove();cb(new Error('Timeout'),null);},20000);window[cn]=function(d){clearTimeout(t);delete window[cn];sc.remove();cb(null,d);};sc.src=GAS+'?callback='+cn+'&payload='+encodeURIComponent(JSON.stringify(p));sc.onerror=function(){clearTimeout(t);delete window[cn];sc.remove();cb(new Error('Error'),null);};document.head.appendChild(sc);}
+function valid(){
+  var ok=true;
+  function chk(id,eid,fn){var v=document.getElementById(id).value.trim();var e=document.getElementById(eid);var p=fn(v);e.classList.toggle('show',!p);if(!p)ok=false;}
+  chk('f-nama','e-nama',function(v){return v.length>=3;});
+  chk('f-hp','e-hp',function(v){return /^08\d{8,12}$/.test(v);});
+  chk('f-email','e-email',function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);});
+  chk('f-alamat','e-alamat',function(v){return v.length>=10;});
+  var nop=rawNOP();document.getElementById('e-nop').classList.toggle('show',nop.length!==18);if(nop.length!==18)ok=false;
+  chk('f-namawp','e-namawp',function(v){return v.length>=3;});
+  chk('f-tahun','e-tahun',function(v){return v!=='';});
+  chk('f-letak','e-letak',function(v){return v.length>=10;});
+  chk('f-keperluan','e-keperluan',function(v){return v.length>=20;});
+  var pp=document.getElementById('p1').checked&&document.getElementById('p2').checked;
+  document.getElementById('e-p').classList.toggle('show',!pp);if(!pp)ok=false;
+  document.getElementById('e-ttd').classList.toggle('show',!ttdOk);if(!ttdOk)ok=false;
+  return ok;
+}
+function doSubmit(){
+  if(!valid())return;
+  var btn=document.getElementById('btn-sub');btn.disabled=true;btn.innerHTML='<div class="spin"></div>Mengirim...';
+  var nama=document.getElementById('f-nama').value.trim();
+  var email=document.getElementById('f-email').value.trim();
+  var nopFmt=document.getElementById('nop-d').textContent;
+  var tahun=document.getElementById('f-tahun').value;
+  var emailBody='Yth. Bapak/Ibu '+nama+',\n\nTerima kasih telah mengajukan Permohonan Buka Blokir PBB-P2 melalui Sistem Permohonan Online Badan Keuangan Daerah Kabupaten Tabanan.\n\nBerikut adalah informasi pengajuan Anda:\n\n  Nomor Formulir   : [NOMOR]\n  Nama Pemohon     : '+nama+'\n  NOP              : '+nopFmt+'\n  Tahun Pajak      : '+tahun+'\n\nMohon simpan Nomor Formulir tersebut untuk keperluan pengecekan status permohonan Anda melalui menu Cek Status pada aplikasi kami.\n\nPermohonan Anda sedang dalam proses verifikasi oleh petugas. Apabila terdapat kekurangan atau perbaikan data, Anda akan mendapat pemberitahuan melalui email ini.\n\nDemikian pemberitahuan ini disampaikan. Atas perhatian dan kepercayaan Bapak/Ibu, kami ucapkan terima kasih.\n\nHormat kami,\nBidang PBB-P2 dan BPHTB\nBadan Keuangan Daerah Kabupaten Tabanan\nJl. Pahlawan No. 1 Tabanan | Telp. (0361) 811312';
+  var payload={action:'submit',nama:nama,nohp:document.getElementById('f-hp').value.trim(),email:email,alamat:document.getElementById('f-alamat').value.trim(),nop:rawNOP(),nopFmt:nopFmt,namaWP:document.getElementById('f-namawp').value.trim(),tahun:tahun,luasTanah:document.getElementById('f-ltanah').value||'-',luasBangunan:document.getElementById('f-lbangunan').value||'-',letak:document.getElementById('f-letak').value.trim(),keperluan:document.getElementById('f-keperluan').value.trim(),ttdBase64:document.getElementById('ttd-cv').toDataURL('image/png'),emailBody:emailBody};
+  api(payload,function(err,res){btn.disabled=false;btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z"/></svg> Submit Permohonan';if(err||!res||!res.success){alert('Gagal mengirim.\n'+(res?res.message:err));return;}LAST_NOM=res.nomor;localStorage.setItem('pbb_last_email',email);document.getElementById('so-n').textContent=res.nomor;document.getElementById('so-e').textContent=email;document.getElementById('so').classList.add('show');resetForm();});
+}
+function resetForm(){['f-nama','f-hp','f-email','f-alamat','f-namawp','f-letak','f-keperluan','f-ltanah','f-lbangunan'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('f-nop').value='';document.getElementById('nop-d').textContent='00.00.000.000.000.0000.0';document.getElementById('f-tahun').value='';document.getElementById('p1').checked=false;document.getElementById('p2').checked=false;clearTTD();document.querySelectorAll('.er').forEach(function(e){e.classList.remove('show');});}
+function closeSuc(){document.getElementById('so').classList.remove('show');}
+function goStatusAfterSuc(){closeSuc();gP2('status');document.getElementById('ck-n').value=LAST_NOM;}
+function doCek(){
+  var n=document.getElementById('ck-n').value.trim().toUpperCase(),h=document.getElementById('ck-h').value.trim();
+  var err=document.getElementById('ck-e'),res=document.getElementById('ck-r');
+  err.style.display='none';res.style.display='none';
+  if(!n||!h){err.textContent='Nomor Surat dan No HP wajib diisi.';err.style.display='block';return;}
+  var btn=document.getElementById('btn-ck');btn.disabled=true;btn.innerHTML='<div class="spin"></div>Mencari...';
+  api({action:'cekStatus',nomor:n,nohp:h},function(e,d){
+    btn.disabled=false;btn.textContent='Cek Status';
+    if(e||!d){err.textContent='Gagal terhubung.';err.style.display='block';return;}
+    if(!d.success){err.textContent=d.message;err.style.display='block';return;}
+    var bc=d.status==='Selesai'?'bd':d.status==='Perbaikan'?'bf':'bw2';
+    res.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><span style="font-size:13px;color:var(--i3)">Status:</span><span class="badge '+bc+'">&#9679; '+esc(d.status)+'</span></div><div class="det"><div class="dr"><span class="dl">Nomor Surat</span><span class="dv2" style="font-family:\'DM Mono\',monospace;font-size:12px">'+esc(d.nomor)+'</span></div><div class="dr"><span class="dl">Nama Pemohon</span><span class="dv2">'+esc(d.nama)+'</span></div><div class="dr"><span class="dl">NOP</span><span class="dv2" style="font-family:\'DM Mono\',monospace;font-size:11px">'+esc(d.nopFmt)+'</span></div><div class="dr"><span class="dl">Nama WP</span><span class="dv2">'+esc(d.namaWP)+'</span></div><div class="dr"><span class="dl">Tahun Pajak</span><span class="dv2">'+esc(d.tahun)+'</span></div><div class="dr"><span class="dl">Tanggal Ajuan</span><span class="dv2">'+esc(d.tgl)+'</span></div>'+(d.catatan?'<div class="dr"><span class="dl">Catatan</span><span class="dv2" style="color:var(--wn)">'+esc(d.catatan)+'</span></div>':'')+'</div>'+(d.status==='Selesai'?'<a href="https://pbb.tabanankab.go.id/login" target="_blank" rel="noopener" class="btn bblue" style="width:100%;justify-content:center;margin-top:12px;text-decoration:none"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Cek Tagihan di I-PBB Tabanan</a>':'')+'<div style="margin-top:10px"><button class="btn bw" style="width:100%;justify-content:center" onclick="cetakSurat(JSON.parse(decodeURIComponent(\''+encodeURIComponent(JSON.stringify(d))+'\')))"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Cetak Surat</button></div>';
+    res.style.display='block';
+  });
+}
+function doLogin(){var u=document.getElementById('a-u').value.trim(),p=document.getElementById('a-p').value;var err=document.getElementById('a-e');err.style.display='none';if(!u||!p){err.textContent='Username dan password wajib diisi.';err.style.display='block';return;}var btn=document.getElementById('btn-li');btn.disabled=true;btn.innerHTML='<div class="spin"></div>Masuk...';api({action:'adminLogin',username:u,password:p},function(e,d){btn.disabled=false;btn.textContent='Masuk';if(e||!d){err.textContent='Gagal terhubung.';err.style.display='block';return;}if(!d.success){err.textContent=d.message;err.style.display='block';return;}TOKEN=d.token;USERNAME=d.username;document.getElementById('adm-in').style.display='none';document.getElementById('adm-panel').style.display='block';loadStats();loadData();});}
+function doLogout(){TOKEN='';USERNAME='';ADM_DATA=[];document.getElementById('adm-in').style.display='block';document.getElementById('adm-panel').style.display='none';document.getElementById('a-u').value='';document.getElementById('a-p').value='';}
+function loadStats(){api({action:'getStats',token:TOKEN},function(e,d){if(!d||!d.success)return;document.getElementById('st-t').textContent=d.total;document.getElementById('st-w').textContent=d.menunggu;document.getElementById('st-s').textContent=d.selesai;});}
+function loadData(){document.getElementById('a-tbl').innerHTML='<div style="padding:24px;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--i3)"><div class="spin" style="border-color:rgba(0,0,0,.15);border-top-color:var(--i2)"></div>Memuat...</div>';api({action:'getData',token:TOKEN,query:''},function(e,d){if(e||!d){document.getElementById('a-tbl').innerHTML='<div style="padding:24px;font-size:13px;color:var(--i3)">Gagal memuat.</div>';return;}if(d.expired){doLogout();return;}ADM_DATA=d.data||[];renderTbl();});}
+var TBL_PAGE=1,TBL_PER=15;
+function renderTbl(){
+  var q=document.getElementById('a-cari').value.toLowerCase();
+  var f=ADM_DATA.filter(function(d){return !q||(d.nomor+d.nama+d.nopFmt+d.namaWP).toLowerCase().includes(q);});
+  var wrap=document.getElementById('a-tbl');
+  if(!f.length){wrap.innerHTML='<div style="padding:36px;text-align:center;color:var(--i3);font-size:13px">Tidak ada data'+(q?' yang sesuai':'')+'.</div>';return;}
+  var totalPg=Math.ceil(f.length/TBL_PER);
+  if(TBL_PAGE>totalPg)TBL_PAGE=totalPg;
+  var start=(TBL_PAGE-1)*TBL_PER,slice=f.slice(start,start+TBL_PER);
+  var h='<div class="tw-scroll"><table><thead><tr>'
+    +'<th style="width:128px">Nomor Surat</th><th>Nama</th>'
+    +'<th style="width:185px">NOP</th><th style="width:58px">Tahun</th>'
+    +'<th style="width:90px">Status</th><th style="width:68px">Aksi</th>'
+    +'</tr></thead><tbody>';
+  slice.forEach(function(d){
+    var bc=d.status==='Selesai'?'bd':d.status==='Perbaikan'?'bf':'bw2';
+    h+='<tr>'
+      +'<td style="font-family:\'DM Mono\',monospace;font-size:11px;white-space:nowrap">'+esc(d.nomor)+'</td>'
+      +'<td style="min-width:140px">'+esc(d.nama)+'</td>'
+      +'<td style="font-family:\'DM Mono\',monospace;font-size:11px;white-space:nowrap">'+esc(d.nopFmt)+'</td>'
+      +'<td style="white-space:nowrap">'+esc(d.tahun)+'</td>'
+      +'<td><span class="badge '+bc+'" style="font-size:11px">'+esc(d.status)+'</span></td>'
+      +'<td><button class="btn br" style="padding:5px 10px;font-size:12px" onclick="openMod(\''+d.nomor+'\')">Proses</button></td>'
+      +'</tr>';
+  });
+  h+='</tbody></table></div>';
+  var from=start+1,to=Math.min(start+TBL_PER,f.length);
+  h+='<div class="tw-pg"><span>Menampilkan <strong>'+from+'–'+to+'</strong> dari <strong>'+f.length+'</strong> data</span><div class="tw-pg-btn">';
+  h+='<button onclick="tblGo(TBL_PAGE-1)" '+(TBL_PAGE<=1?'disabled':'')+'>&#8592;</button>';
+  var pS=Math.max(1,TBL_PAGE-2),pE=Math.min(totalPg,pS+4);if(pE-pS<4)pS=Math.max(1,pE-4);
+  for(var p=pS;p<=pE;p++)h+='<button onclick="tblGo('+p+')"'+(p===TBL_PAGE?' class="active"':'')+'>'+p+'</button>';
+  h+='<button onclick="tblGo(TBL_PAGE+1)" '+(TBL_PAGE>=totalPg?'disabled':'')+'>&#8594;</button>';
+  h+='</div></div>';
+  wrap.innerHTML=h;
+}
+function tblGo(p){TBL_PAGE=parseInt(p);renderTbl();}
+function openMod(nomor){var d=ADM_DATA.find(function(x){return x.nomor===nomor;});if(!d)return;CUR_ROW=d;document.getElementById('mod-ttl').textContent='Permohonan: '+d.nomor;var lb=[d.labelNjop1||'Periode 1',d.labelNjop2||'Periode 2',d.labelNjop3||'Periode 3'];var b='<div class="ms"><div class="mst">Data Pemohon</div><div class="mg"><div class="mf"><div class="mfl">Nama</div><div class="mfv">'+esc(d.nama)+'</div></div><div class="mf"><div class="mfl">No HP</div><div class="mfv">'+esc(d.nohp)+'</div></div><div class="mf"><div class="mfl">Email</div><div class="mfv">'+esc(d.email)+'</div></div><div class="mf"><div class="mfl">Tanggal</div><div class="mfv">'+esc(d.tgl)+'</div></div><div class="mf" style="grid-column:1/-1"><div class="mfl">Alamat</div><div class="mfv">'+esc(d.alamat)+'</div></div></div></div>';b+='<div class="ms"><div class="mst">Data SPPT</div><div class="mg"><div class="mf" style="grid-column:1/-1"><div class="mfl">NOP</div><div class="mfv" style="font-family:\'DM Mono\',monospace;color:var(--red)">'+esc(d.nopFmt)+'</div></div><div class="mf"><div class="mfl">Nama WP</div><div class="mfv">'+esc(d.namaWP)+'</div></div><div class="mf"><div class="mfl">Tahun</div><div class="mfv">'+esc(d.tahun)+'</div></div><div class="mf"><div class="mfl">Luas Tanah</div><div class="mfv">'+esc(d.luasTanah||'—')+' m²</div></div><div class="mf"><div class="mfl">Luas Bgn</div><div class="mfv">'+esc(d.luasBangunan||'—')+' m²</div></div><div class="mf" style="grid-column:1/-1"><div class="mfl">Letak</div><div class="mfv">'+esc(d.letak)+'</div></div><div class="mf" style="grid-column:1/-1"><div class="mfl">Alasan</div><div class="mfv">'+esc(d.keperluan)+'</div></div></div></div>';b+='<div class="ms"><div class="mst">NJOP Total Objek Pajak (Rp)</div><div class="nw"><h4>Input salah satu periode — periode lain otomatis dihitung</h4><div class="ng"><div class="nf"><label>P1 · 2014–2019</label><input type="number" id="n0" value="'+(d.njop1||'')+'" placeholder="Rp" oninput="autoNJOP(0)"></div><div class="nf"><label>P2 · 2020–2023</label><input type="number" id="n1" value="'+(d.njop2||'')+'" placeholder="Rp" oninput="autoNJOP(1)"></div><div class="nf"><label>P3 · 2024–2026</label><input type="number" id="n2" value="'+(d.njop3||'')+'" placeholder="Rp" oninput="autoNJOP(2)"></div></div><div style="font-size:10px;color:var(--i3);margin-top:8px;line-height:1.6">P1→P2: naik '+getNfromNOP()+' tingkat NJOP bumi (51.02.030/040=1 tingkat, lainnya=2 tingkat) | P3 via pengelompokan (P2×5)</div></div></div>';b+='<div class="ms"><div class="mst">Update Status</div><div class="fg" style="margin-bottom:12px"><label>Status</label><select id="m-st" onchange="autoCatatan()"><option value="Menunggu" '+(d.status==='Menunggu'?'selected':'')+'>Menunggu</option><option value="Selesai" '+(d.status==='Selesai'?'selected':'')+'>Selesai</option><option value="Perbaikan" '+(d.status==='Perbaikan'?'selected':'')+'>Perbaikan</option></select></div><div class="fg"><label>Catatan Petugas</label><textarea id="m-cat" style="min-height:60px">'+(d.catatan||'')+'</textarea></div></div>';document.getElementById('mod-bd').innerHTML=b;document.getElementById('mod-ov').classList.add('show');}
+// autoNJOP: src=0→P1 diinput, src=1→P2 diinput, src=2→P3 diinput
+// P1→P2: cari tingkat NJOP P1 di TBL, naik N tingkat (N=1 jika NOP 51.02.030/51.02.040, N=2 lainnya)
+// P2→P3: NJOP P2 × 5 = nilai pengelompokan → lookup TBL_PGLP
+// P3→P2: nilai pengelompokan / 5 → cari tingkat terdekat di TBL → NJOP P2
+function getNfromNOP(){
+  var nop=CUR_ROW?String(CUR_ROW.nop||'').replace(/\D/g,''):'';
+  var pre=nop.substring(0,7);
+  return (pre==='5102030'||pre==='5102040')?1:2;
+}
+function tblFindTingkat(njopVal){
+  // Cari tingkat di TBL yang paling mendekati nilai njopVal
+  var best=1;
+  for(var t=1;t<=MAX_TK;t++){if(Math.abs(TBL[t]-njopVal)<Math.abs(TBL[best]-njopVal))best=t;}
+  return best;
+}
+function autoNJOP(src){
+  var f0=document.getElementById('n0'),f1=document.getElementById('n1'),f2=document.getElementById('n2');
+  if(!f0||!f1||!f2)return;
+  var v0=parseFloat(f0.value)||0,v1=parseFloat(f1.value)||0,v2=parseFloat(f2.value)||0;
+  var N=getNfromNOP();
+
+  function p1ToP2(njopP1){
+    var tk=tblFindTingkat(njopP1);
+    var tkP2=Math.min(tk+N,MAX_TK);
+    return TBL[tkP2];
+  }
+  function p2ToP1(njopP2){
+    var tk=tblFindTingkat(njopP2);
+    var tkP1=Math.max(tk-N,1);
+    return TBL[tkP1];
+  }
+  function p2ToP3(njopP2){
+    return getNJOPdariPengelompokan(njopP2*5);
+  }
+  function p3ToP2(njopP3){
+    // balik: cari NJOP P2 yang menghasilkan NJOP P3 via pengelompokan
+    var best=1;
+    for(var t=1;t<=MAX_TK;t++){
+      if(Math.abs(getNJOPdariPengelompokan(TBL[t]*5)-njopP3)<Math.abs(getNJOPdariPengelompokan(TBL[best]*5)-njopP3))best=t;
+    }
+    return TBL[best];
+  }
+
+  if(src===0&&v0){
+    var p2=p1ToP2(v0);
+    f1.value=p2;
+    f2.value=p2ToP3(p2);
+  } else if(src===1&&v1){
+    f0.value=p2ToP1(v1);
+    f2.value=p2ToP3(v1);
+  } else if(src===2&&v2){
+    var p2f=p3ToP2(v2);
+    f1.value=p2f;
+    f0.value=p2ToP1(p2f);
+  }
+}
+function doUpdate(){if(!CUR_ROW)return;var btn=document.getElementById('btn-save');btn.disabled=true;btn.innerHTML='<div class="spin"></div>Menyimpan...';var n1=document.getElementById('n1'),n2=document.getElementById('n2'),st=document.getElementById('m-st').value;api({action:'updateData',token:TOKEN,rowIndex:CUR_ROW.rowIndex,njop1:document.getElementById('n0').value,njop2:n1.disabled?'':n1.value,njop3:n2.disabled?'':n2.value,status:st,catatan:document.getElementById('m-cat').value,diproses:USERNAME},function(e,d){btn.disabled=false;btn.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg> Simpan';if(e||!d||!d.success){alert('Gagal: '+(d?d.message:'error'));return;}var idx=ADM_DATA.findIndex(function(x){return x.nomor===CUR_ROW.nomor;});if(idx>=0){ADM_DATA[idx].status=st;ADM_DATA[idx].catatan=document.getElementById('m-cat').value;}closeMod();loadStats();renderTbl();});}
+function closeMod(){document.getElementById('mod-ov').classList.remove('show');CUR_ROW=null;}
+function autoCatatan(){
+  var st=document.getElementById('m-st');
+  var cat=document.getElementById('m-cat');
+  if(!st||!cat)return;
+  var msg={
+    'Selesai':'Proses Buka Blokir PBB selesai. Silahkan cek informasi Tagihan PBB pada I-PBB Tabanan.',
+    'Perbaikan':'Data SPPT anda salah, silahkan diperbaiki.'
+  };
+  if(msg[st.value])cat.value=msg[st.value];
+}
+function esc(s){return String(s||'—').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function buildSurat(d){var tgl=d.tgl?new Date(d.tgl).toLocaleDateString('id-ID',{day:'2-digit',month:'long',year:'numeric'}):new Date().toLocaleDateString('id-ID',{day:'2-digit',month:'long',year:'numeric'});var ttdImg=d.ttdBase64&&d.ttdBase64.length>50?'<img src="'+d.ttdBase64+'" style="width:100%;height:auto;display:block;">':'';return '<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>Surat '+esc(d.nomor)+'</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:"Times New Roman",serif;font-size:12pt;color:#000;width:210mm;min-height:297mm;margin:0 auto;padding:20mm 25mm 20mm 30mm;line-height:1.5}.kop{display:flex;gap:14px;border-bottom:3px solid #000;padding-bottom:8px;margin-bottom:18px}.kop img{width:68px;height:68px;object-fit:contain;flex-shrink:0}.kop-tx{flex:1;text-align:center}.kop-tx h1{font-size:14pt;font-weight:700;text-transform:uppercase;margin-bottom:2px}.kop-tx h2{font-size:11pt;font-weight:700;text-transform:uppercase;margin-bottom:2px}.kop-tx p{font-size:9.5pt;line-height:1.4}.sh{display:flex;justify-content:space-between;margin-bottom:16px}.nb3{font-size:11pt;line-height:1.8}.nb3 .row{display:flex;gap:8px}.nb3 .lbl{min-width:72px}.nb3 .val{min-width:180px}.tgl{font-size:11pt;text-align:right}.tuj{margin-bottom:16px;font-size:11pt;line-height:1.8}.pb2{margin-bottom:14px;font-size:11pt}.td{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:11pt}.td td{padding:2px 0;vertical-align:top}.td td:nth-child(1){width:42%}.td td:nth-child(2){width:3%;text-align:center}.dl2{border-bottom:1px dotted #000;display:inline-block;min-width:220px}.al{font-size:11pt;margin-bottom:4px}.av{border-bottom:1px dotted #000;width:100%;display:block;min-height:22px;margin-bottom:12px}.lp{font-size:11pt;margin-bottom:4px}.ll{list-style:none;font-size:11pt;margin-bottom:14px;line-height:2}.ll li{padding-left:28px;position:relative}.pt{font-size:11pt;margin-bottom:24px}.ttd{display:flex;justify-content:flex-end}.ttdb{text-align:center;width:200px}.ttdb p{font-size:11pt;margin-bottom:4px}.ttda{display:block;margin:4px 0}.ttdn{border-top:1px solid #000;padding-top:3px;font-size:11pt;font-weight:700}@media print{body{padding:20mm 25mm 20mm 30mm}}</style></head><body><div class="kop"><img src="https://lh3.googleusercontent.com/d/1KsP6VSELFzpfvkaz4rHUEvrFkJGLoBIm" onerror="this.style.display=\'none\'"><div class="kop-tx"><h1>Pemerintah Kabupaten Tabanan</h1><h2>Badan Keuangan Daerah</h2><p>Bidang PBB-P2 dan BPHTB — Jl. Pahlawan No. 1 Tabanan — (0361) 811312</p></div></div><div class="sh"><div class="nb3"><div class="row"><span class="lbl">Nomor</span><span>:</span><span class="val">&nbsp;'+esc(d.nomor)+'</span></div><div class="row"><span class="lbl">Lampiran</span><span>:</span><span class="val">&nbsp;-</span></div><div class="row"><span class="lbl">Perihal</span><span>:</span><span class="val">&nbsp;<strong>Permohonan Mengaktifkan PBB-P2</strong></span></div></div><div class="tgl">Tabanan, '+tgl+'</div></div><div class="tuj"><div>Kepada</div><div>Yth. Bupati Tabanan</div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;U.p. Kepala Badan Keuangan Daerah</div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;di – <strong>Tabanan</strong></div></div><div class="pb2">Yang bertanda tangan dibawah ini :</div><table class="td"><tr><td>Nama</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.nama)+'</span></td></tr><tr><td>Alamat</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.alamat)+'</span></td></tr><tr><td>Nomor Telepon/HP</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.nohp||'—')+'</span></td></tr></table><div class="pb2">dengan ini mengajukan permohonan mengaktifkan PBB-P2 :</div><table class="td"><tr><td>Nomer Objek Pajak</td><td>:</td><td><span class="dl2">&nbsp;<strong>'+esc(d.nopFmt)+'</strong></span></td></tr><tr><td>Nama Wajib Pajak</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.namaWP)+'</span></td></tr><tr><td>Letak Objek Pajak</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.letak)+'</span></td></tr><tr><td>Luas Tanah</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.luasTanah||'—')+' m\u00B2</span></td></tr><tr><td>Luas Bangunan</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.luasBangunan||'—')+' m\u00B2</span></td></tr></table><div class="al">Alasan mengaktifkan PBB-P2 :</div><span class="av">&nbsp;'+esc(d.keperluan)+'</span><div class="lp">Sebagai bahan pertimbangan, bersama ini kami lampirkan :</div><ul class="ll"><li><span style="position:absolute;left:0">1.</span>&nbsp;Fotocopy KTP;</li><li><span style="position:absolute;left:0">2.</span>&nbsp;Bukti Lunas PBB-P2;</li><li><span style="position:absolute;left:0">3.</span>&nbsp;Surat Pernyataan siap membayar PBB-P2 yang masih terutang.</li></ul><div class="pt">Demikian permohonan ini diajukan, untuk dapat diproses lebih lanjut</div><div class="ttd"><div class="ttdb"><p>Pemohon</p><div class="ttda">'+ttdImg+'</div><div class="ttdn">'+esc(d.nama)+'</div></div></div><script>window.onload=function(){var i=document.images,n=i.length,d=0;if(!n){window.focus();window.print();return;}function g(){d++;if(d>=n){window.focus();window.print();}}for(var j=0;j<n;j++){i[j].addEventListener("load",g);i[j].addEventListener("error",g);}};<\/script></body></html>';}
+function cetakSurat(d){var w=window.open('','_blank');if(!w){alert('Pop-up diblokir.');return;}w.document.open();w.document.write(buildSurat(d));w.document.close();}
+function printFromMod(){if(CUR_ROW)cetakSurat(CUR_ROW);}
+fetch(GAS+'?ping=1').then(function(){document.getElementById('nd').style.background='var(--ok)';document.getElementById('nst').textContent='Terhubung';document.querySelector('.ns').style.color='var(--ok)';}).catch(function(){document.getElementById('nd').style.background='var(--red)';document.getElementById('nst').textContent='Offline';document.querySelector('.ns').style.color='var(--red)';});
+</script>
+</body>
+</html>
