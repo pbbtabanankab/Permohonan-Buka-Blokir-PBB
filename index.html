@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sistem Permohonan Buka Blokir PBB</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -200,7 +199,85 @@ table.rt tfoot td{padding:10px 14px;font-weight:700;border-top:2px solid var(--b
 .nb2{font-family:'DM Mono',monospace;font-size:18px;font-weight:500;color:var(--red);background:var(--rs);border:1.5px dashed var(--rm);border-radius:10px;padding:14px;margin:12px 0;letter-spacing:2px}
 .sa{display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap}
 .info-box{background:var(--ob);border:1px solid #a8d5bb;border-radius:8px;padding:11px 14px;font-size:12px;color:#1a5c38;margin-bottom:12px;text-align:left;line-height:1.6}
-@media(max-width:640px){.fr,.mg,.ng,.sts,.sg,.ig,.hero-stats{grid-template-columns:1fr}.nb-w{gap:0}.nb{padding:7px 8px;font-size:11.5px}}
+@media(max-width:640px){
+  /* Grid layouts → single column */
+  .fr,.mg,.ng,.sts,.sg,.ig,.hero-stats{grid-template-columns:1fr}
+
+  /* Nav: logo text truncate, status hidden, buttons scroll */
+  .ni{padding:0 12px;height:auto;flex-wrap:wrap;gap:0}
+  .nl{padding:10px 0}
+  .nt strong{font-size:12px}.nt span{display:none}
+  .nl img{width:26px;height:26px}
+  .ns{display:none}
+  .nb-w{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;display:flex;flex-wrap:nowrap;gap:0;border-top:1px solid var(--bor);padding:4px 0;scrollbar-width:none}
+  .nb-w::-webkit-scrollbar{display:none}
+  .nb{padding:7px 10px;font-size:11.5px;white-space:nowrap;flex-shrink:0}
+
+  /* Main padding */
+  main{padding:16px 12px}
+
+  /* Hero card */
+  .hero-total{font-size:20px}
+  .hero-card{padding:16px}
+
+  /* Beranda cards */
+  .hc{padding:24px 16px}
+  .hb{flex-direction:column}
+  .hb .btn{width:100%;justify-content:center}
+  .sb{padding:16px}
+
+  /* Form */
+  .fbd{padding:14px}
+  .fbh{padding:10px 14px}
+  .ff{flex-direction:column;gap:10px;padding:12px 14px}
+  .ff p{max-width:100%}
+  .ff .btn{width:100%;justify-content:center}
+
+  /* TTD canvas responsive */
+  .ttd-canvas{height:140px}
+
+  /* Tabel simulasi - scroll */
+  .tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table.rt{min-width:520px;font-size:11.5px}
+  table.rt thead th,table.rt tbody td{padding:7px 10px}
+
+  /* Modal full screen */
+  .ov{padding:0;align-items:flex-end}
+  .mb{border-radius:14px 14px 0 0;max-width:100%;margin:0}
+  .md{padding:16px}
+  .mh{padding:12px 16px}
+  .mft{padding:10px 16px}
+  .mg{grid-template-columns:1fr}
+
+  /* Status page */
+  .sw{max-width:100%}
+
+  /* Admin table */
+  .tw-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tw-scroll table{min-width:600px}
+  .sts{grid-template-columns:1fr 1fr}
+
+  /* Simulasi wrap */
+  .sim-wrap{max-width:100%}
+  .bw-wrap{max-width:100%}
+  .sc-body{padding:14px}
+  .sc-head{padding:10px 14px}
+
+  /* Buttons full width in forms */
+  .sc-body>.btn,.sim-card .btn{width:100%;justify-content:center}
+
+  /* Formula box */
+  .formula-box{padding:12px;font-size:11.5px}
+  .formula-line{font-size:11px}
+
+  /* Keterangan legend wrap */
+  .leg{gap:8px}
+  .leg-item{font-size:11px}
+
+  /* Success overlay */
+  .sbox{padding:24px 20px;border-radius:14px}
+  .nb2{font-size:15px;padding:12px}
+}
 </style>
 </head>
 <body>
@@ -636,7 +713,7 @@ function hitungSimulasi(){
 
     var pbb=Math.round(tarif*njkpPct*njopKP);
 
-    var isPaid=tahun<tahunAwal;
+    var isPaid=tahun<=tahunAwal; // tahunAwal = tahun terakhir lunas, tidak perlu dibayar lagi
     if(!isPaid)totalBelumLunas+=pbb;
 
     rows.push({
@@ -975,7 +1052,51 @@ function autoCatatan(){
   if(msg[st.value])cat.value=msg[st.value];
 }
 function esc(s){return String(s||'—').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-function buildSurat(d){var tgl=d.tgl?new Date(d.tgl).toLocaleDateString('id-ID',{day:'2-digit',month:'long',year:'numeric'}):new Date().toLocaleDateString('id-ID',{day:'2-digit',month:'long',year:'numeric'});var ttdImg=d.ttdBase64&&d.ttdBase64.length>50?'<img src="'+d.ttdBase64+'" style="width:100%;height:auto;display:block;">':'';return '<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>Surat '+esc(d.nomor)+'</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:"Times New Roman",serif;font-size:12pt;color:#000;width:210mm;min-height:297mm;margin:0 auto;padding:20mm 25mm 20mm 30mm;line-height:1.5}.kop{display:flex;gap:14px;border-bottom:3px solid #000;padding-bottom:8px;margin-bottom:18px}.kop img{width:68px;height:68px;object-fit:contain;flex-shrink:0}.kop-tx{flex:1;text-align:center}.kop-tx h1{font-size:14pt;font-weight:700;text-transform:uppercase;margin-bottom:2px}.kop-tx h2{font-size:11pt;font-weight:700;text-transform:uppercase;margin-bottom:2px}.kop-tx p{font-size:9.5pt;line-height:1.4}.sh{display:flex;justify-content:space-between;margin-bottom:16px}.nb3{font-size:11pt;line-height:1.8}.nb3 .row{display:flex;gap:8px}.nb3 .lbl{min-width:72px}.nb3 .val{min-width:180px}.tgl{font-size:11pt;text-align:right}.tuj{margin-bottom:16px;font-size:11pt;line-height:1.8}.pb2{margin-bottom:14px;font-size:11pt}.td{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:11pt}.td td{padding:2px 0;vertical-align:top}.td td:nth-child(1){width:42%}.td td:nth-child(2){width:3%;text-align:center}.dl2{border-bottom:1px dotted #000;display:inline-block;min-width:220px}.al{font-size:11pt;margin-bottom:4px}.av{border-bottom:1px dotted #000;width:100%;display:block;min-height:22px;margin-bottom:12px}.lp{font-size:11pt;margin-bottom:4px}.ll{list-style:none;font-size:11pt;margin-bottom:14px;line-height:2}.ll li{padding-left:28px;position:relative}.pt{font-size:11pt;margin-bottom:24px}.ttd{display:flex;justify-content:flex-end}.ttdb{text-align:center;width:200px}.ttdb p{font-size:11pt;margin-bottom:4px}.ttda{display:block;margin:4px 0}.ttdn{border-top:1px solid #000;padding-top:3px;font-size:11pt;font-weight:700}@media print{body{padding:20mm 25mm 20mm 30mm}}</style></head><body><div class="kop"><img src="https://lh3.googleusercontent.com/d/1KsP6VSELFzpfvkaz4rHUEvrFkJGLoBIm" onerror="this.style.display=\'none\'"><div class="kop-tx"><h1>Pemerintah Kabupaten Tabanan</h1><h2>Badan Keuangan Daerah</h2><p>Bidang PBB-P2 dan BPHTB — Jl. Pahlawan No. 1 Tabanan — (0361) 811312</p></div></div><div class="sh"><div class="nb3"><div class="row"><span class="lbl">Nomor</span><span>:</span><span class="val">&nbsp;'+esc(d.nomor)+'</span></div><div class="row"><span class="lbl">Lampiran</span><span>:</span><span class="val">&nbsp;-</span></div><div class="row"><span class="lbl">Perihal</span><span>:</span><span class="val">&nbsp;<strong>Permohonan Mengaktifkan PBB-P2</strong></span></div></div><div class="tgl">Tabanan, '+tgl+'</div></div><div class="tuj"><div>Kepada</div><div>Yth. Bupati Tabanan</div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;U.p. Kepala Badan Keuangan Daerah</div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;di – <strong>Tabanan</strong></div></div><div class="pb2">Yang bertanda tangan dibawah ini :</div><table class="td"><tr><td>Nama</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.nama)+'</span></td></tr><tr><td>Alamat</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.alamat)+'</span></td></tr><tr><td>Nomor Telepon/HP</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.nohp||'—')+'</span></td></tr></table><div class="pb2">dengan ini mengajukan permohonan mengaktifkan PBB-P2 :</div><table class="td"><tr><td>Nomer Objek Pajak</td><td>:</td><td><span class="dl2">&nbsp;<strong>'+esc(d.nopFmt)+'</strong></span></td></tr><tr><td>Nama Wajib Pajak</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.namaWP)+'</span></td></tr><tr><td>Letak Objek Pajak</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.letak)+'</span></td></tr><tr><td>Luas Tanah</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.luasTanah||'—')+' m\u00B2</span></td></tr><tr><td>Luas Bangunan</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.luasBangunan||'—')+' m\u00B2</span></td></tr></table><div class="al">Alasan mengaktifkan PBB-P2 :</div><span class="av">&nbsp;'+esc(d.keperluan)+'</span><div class="lp">Sebagai bahan pertimbangan, bersama ini kami lampirkan :</div><ul class="ll"><li><span style="position:absolute;left:0">1.</span>&nbsp;Fotocopy KTP;</li><li><span style="position:absolute;left:0">2.</span>&nbsp;Bukti Lunas PBB-P2;</li><li><span style="position:absolute;left:0">3.</span>&nbsp;Surat Pernyataan siap membayar PBB-P2 yang masih terutang.</li></ul><div class="pt">Demikian permohonan ini diajukan, untuk dapat diproses lebih lanjut</div><div class="ttd"><div class="ttdb"><p>Pemohon</p><div class="ttda">'+ttdImg+'</div><div class="ttdn">'+esc(d.nama)+'</div></div></div><script>window.onload=function(){var i=document.images,n=i.length,d=0;if(!n){window.focus();window.print();return;}function g(){d++;if(d>=n){window.focus();window.print();}}for(var j=0;j<n;j++){i[j].addEventListener("load",g);i[j].addEventListener("error",g);}};<\/script></body></html>';}
+function buildSurat(d){
+  var tgl=(function(){
+    var raw=String(d.tgl||'').trim();
+    // Buang bagian waktu jika ada (spasi atau T)
+    var datePart=raw.split('T')[0].split(' ')[0];
+    // Format YYYY-MM-DD (ISO tanpa waktu)
+    var dash=datePart.split('-');
+    if(dash.length===3&&dash[0].length===4){
+      return dash[2]+'/'+dash[1]+'/'+dash[0];
+    }
+    // Format DD/MM/YYYY atau DD/MM/YY — ambil bagian tanggal saja
+    return datePart;
+  })();
+  var ttdImg=d.ttdBase64&&d.ttdBase64.length>50?'<img src="'+d.ttdBase64+'" style="width:100%;height:auto;display:block;">':'';
+
+  var css='*{box-sizing:border-box;margin:0;padding:0}body{font-family:"Times New Roman",serif;font-size:12pt;color:#000;width:210mm;min-height:297mm;margin:0 auto;padding:20mm 25mm 20mm 30mm;line-height:1.5}.kop{display:flex;gap:14px;border-bottom:3px solid #000;padding-bottom:8px;margin-bottom:18px}.kop img{width:68px;height:68px;object-fit:contain;flex-shrink:0}.kop-tx{flex:1;text-align:center}.kop-tx h1{font-size:14pt;font-weight:700;text-transform:uppercase;margin-bottom:2px}.kop-tx h2{font-size:11pt;font-weight:700;text-transform:uppercase;margin-bottom:2px}.kop-tx p{font-size:9.5pt;line-height:1.4}.sh{display:flex;justify-content:space-between;margin-bottom:16px}.nb3{font-size:11pt;line-height:1.8}.nb3 .row{display:flex;gap:8px}.nb3 .lbl{min-width:72px}.nb3 .val{min-width:180px}.tgl{font-size:11pt;text-align:right}.tuj{margin-bottom:16px;font-size:11pt;line-height:1.8}.pb2{margin-bottom:14px;font-size:11pt}.td{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:11pt}.td td{padding:2px 0;vertical-align:top}.td td:nth-child(1){width:42%}.td td:nth-child(2){width:3%;text-align:center}.dl2{border-bottom:1px dotted #000;display:inline-block;min-width:220px}.al{font-size:11pt;margin-bottom:4px}.av{border-bottom:1px dotted #000;width:100%;display:block;min-height:22px;margin-bottom:12px}.lp{font-size:11pt;margin-bottom:4px}.ll{list-style:none;font-size:11pt;margin-bottom:14px;line-height:2}.ll li{padding-left:28px;position:relative}.pt{font-size:11pt;margin-bottom:24px}.ttd{display:flex;justify-content:flex-end}.ttdb{text-align:center;width:200px}.ttdb p{font-size:11pt;margin-bottom:4px}.ttda{display:block;margin:4px 0}.ttdn{border-top:1px solid #000;padding-top:3px;font-size:11pt;font-weight:700}.page2{page-break-before:always;padding-top:0}.sp-title{text-align:center;font-size:14pt;font-weight:700;text-decoration:underline;margin:28px 0 24px}@media print{body{padding:20mm 25mm 20mm 30mm}}';
+
+  // ── HALAMAN 1: Surat Permohonan ──
+  var h1='<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>Surat '+esc(d.nomor)+'</title><style>'+css+'</style></head><body>';
+  h1+='<div class="kop"><img src="https://lh3.googleusercontent.com/d/1KsP6VSELFzpfvkaz4rHUEvrFkJGLoBIm" onerror="this.style.display=\'none\'"><div class="kop-tx"><h1>Pemerintah Kabupaten Tabanan</h1><h2>Badan Keuangan Daerah</h2><p>Bidang PBB-P2 dan BPHTB &mdash; Jl. Pahlawan No. 1 Tabanan &mdash; (0361) 811312</p></div></div>';
+  h1+='<div class="sh"><div class="nb3"><div class="row"><span class="lbl">Nomor</span><span>:</span><span class="val">&nbsp;'+esc(d.nomor)+'</span></div><div class="row"><span class="lbl">Lampiran</span><span>:</span><span class="val">&nbsp;1 (satu) lembar</span></div><div class="row"><span class="lbl">Perihal</span><span>:</span><span class="val">&nbsp;<strong>Permohonan Mengaktifkan PBB-P2</strong></span></div></div><div class="tgl">Tabanan, '+tgl+'</div></div>';
+  h1+='<div class="tuj"><div>Kepada</div><div>Yth. Bupati Tabanan</div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;U.p. Kepala Badan Keuangan Daerah</div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;di &ndash; <strong>Tabanan</strong></div></div>';
+  h1+='<div class="pb2">Yang bertanda tangan dibawah ini :</div>';
+  h1+='<table class="td"><tr><td>Nama</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.nama)+'</span></td></tr><tr><td>Alamat</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.alamat)+'</span></td></tr><tr><td>Nomor Telepon/HP</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.nohp||'&#8212;')+'</span></td></tr></table>';
+  h1+='<div class="pb2">dengan ini mengajukan permohonan mengaktifkan PBB-P2 :</div>';
+  h1+='<table class="td"><tr><td>Nomer Objek Pajak</td><td>:</td><td><span class="dl2">&nbsp;<strong>'+esc(d.nopFmt)+'</strong></span></td></tr><tr><td>Nama Wajib Pajak</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.namaWP)+'</span></td></tr><tr><td>Letak Objek Pajak</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.letak)+'</span></td></tr><tr><td>Luas Tanah</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.luasTanah||'&#8212;')+' m&#178;</span></td></tr><tr><td>Luas Bangunan</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.luasBangunan||'&#8212;')+' m&#178;</span></td></tr></table>';
+  h1+='<div class="al">Alasan mengaktifkan PBB-P2 :</div><span class="av">&nbsp;'+esc(d.keperluan)+'</span>';
+  h1+='<div class="lp">Sebagai bahan pertimbangan, bersama ini kami lampirkan :</div><ul class="ll"><li><span style="position:absolute;left:0">1.</span>&nbsp;Surat Pernyataan siap membayar PBB-P2 yang masih terutang.</li></ul>';
+  h1+='<div class="pt">Demikian permohonan ini diajukan, untuk dapat diproses lebih lanjut</div>';
+  h1+='<div class="ttd"><div class="ttdb"><p>Pemohon</p><div class="ttda">'+ttdImg+'</div><div class="ttdn">'+esc(d.nama)+'</div></div></div>';
+
+  // ── HALAMAN 2: Surat Pernyataan ──
+  var h2='<div class="page2">';
+  h2+='<div class="sp-title">Surat Pernyataan</div>';
+  h2+='<div class="pb2">Yang bertanda tangan dibawah ini :</div>';
+  h2+='<table class="td"><tr><td>Nama</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.nama)+'</span></td></tr><tr><td>No HP</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.nohp||'&#8212;')+'</span></td></tr><tr><td>Alamat</td><td>:</td><td><span class="dl2">&nbsp;'+esc(d.alamat)+'</span></td></tr></table>';
+  h2+='<div class="pb2" style="margin-top:12px">Dengan ini menyatakan bahwa bersedia membayar Pajak Bumi dan Bangunan Perdesaan dan Perkotaan dengan NOP : <strong>'+esc(d.nopFmt)+'</strong>, Nama Wajib Pajak : <strong>'+esc(d.namaWP)+'</strong> yang masih terutang pada tahun pajak setelah diaktifikan.</div>';
+  h2+='<div class="pb2">Demikian surat pernyataan ini saya buat dengan sebenarnya, apabila saya tidak membayar PBB-P2 yang masih terutang pada tahun pajak setelah diaktifkan, saya bersedia dikenakan sanksi sesuai dengan ketentuan yang berlaku.</div>';
+  h2+='<div class="ttd" style="margin-top:40px"><div class="ttdb"><p>Tabanan, '+tgl+'</p><p>Yang membuat pernyataan,</p><div class="ttda">'+ttdImg+'</div><div class="ttdn">'+esc(d.nama)+'</div></div></div>';
+  h2+='</div>';
+
+  var closing='<script>window.onload=function(){var i=document.images,n=i.length,d=0;if(!n){window.focus();window.print();return;}function g(){d++;if(d>=n){window.focus();window.print();}}for(var j=0;j<n;j++){i[j].addEventListener("load",g);i[j].addEventListener("error",g);}};<\/script></body></html>';
+
+  return h1+h2+closing;
+}
 function cetakSurat(d){var w=window.open('','_blank');if(!w){alert('Pop-up diblokir.');return;}w.document.open();w.document.write(buildSurat(d));w.document.close();}
 function printFromMod(){if(CUR_ROW)cetakSurat(CUR_ROW);}
 fetch(GAS+'?ping=1').then(function(){document.getElementById('nd').style.background='var(--ok)';document.getElementById('nst').textContent='Terhubung';document.querySelector('.ns').style.color='var(--ok)';}).catch(function(){document.getElementById('nd').style.background='var(--red)';document.getElementById('nst').textContent='Offline';document.querySelector('.ns').style.color='var(--red)';});
